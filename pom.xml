@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>org.ow2.authzforce</groupId>
+      <artifactId>authzforce-ce-parent</artifactId>
+      <version>6.0.2-SNAPSHOT</version>
+   </parent>
+   <artifactId>authzforce-ce-restful-pdp</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <packaging>pom</packaging>
+   <name>${project.groupId}:${project.artifactId}</name>
+   <description>AuthzForce - Parent Project of RESTful PDP API implementation according to REST Profile of XACML 3.0</description>
+   <url>${project.url}</url>
+   <scm>
+      <!-- Used by Jenkins - Maven release plugin -->
+      <connection>scm:git:${git.url.base}/restful-pdp.git</connection>
+      <developerConnection>scm:git:${git.url.base}/restful-pdp.git</developerConnection>
+      <tag>HEAD</tag>
+      <!-- Publicly browsable repository URL. For example, via Gitlab web UI. -->
+      <url>${git.url.base}/restful-pdp</url>
+   </scm>
+
+   <!-- distributionManagement defined in parent POM already -->
+   <dependencyManagement>
+      <dependencies>
+         <!-- Test dependencies -->
+         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+         </dependency>
+         <!-- /Test dependencies -->
+      </dependencies>
+   </dependencyManagement>
+   <modules>
+      <module>jaxrs</module>
+      <module>cxf-spring-boot-server</module>
+   </modules>
+</project>
+
+   

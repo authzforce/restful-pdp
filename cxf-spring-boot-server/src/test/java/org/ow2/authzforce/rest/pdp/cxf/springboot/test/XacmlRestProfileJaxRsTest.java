@@ -1,0 +1,83 @@
+package org.ow2.authzforce.rest.pdp.cxf.springboot.test;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collections;
+
+import org.apache.cxf.jaxrs.client.WebClient;
+import org.json.JSONObject;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.ow2.authzforce.jaxrs.util.JsonRiJaxrsProvider;
+import org.ow2.authzforce.rest.pdp.cxf.springboot.CxfJaxrsPdpSpringBootApp;
+import org.ow2.authzforce.xacml.json.model.LimitsCheckingJSONObject;
+import org.ow2.authzforce.xacml.json.model.Xacml3JsonUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
+
+/**
+ * Test for CXF/JAX-RS-based REST profile implementation using XACML JSON Profile for payloads
+ * 
+ */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = CxfJaxrsPdpSpringBootApp.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+public class XacmlRestProfileJaxRsTest
+{
+	private static final int MAX_JSON_STRING_LENGTH = 100;
+
+	/*
+	 * Max number of child elements - key-value pairs or items - in JSONObject/JSONArray
+	 */
+	private static final int MAX_JSON_CHILDREN_COUNT = 100;
+
+	private static final int MAX_JSON_DEPTH = 10;
+
+	@LocalServerPort
+	private int port;
+
+	@Autowired
+	private TestRestTemplate restTemplate;
+
+	@Test
+	public void testPdpRequest() throws IOException
+	{
+		// Request body
+		final String reqLocation = "src/test/resources/IIA001/Request.json";
+		try (InputStream reqIn = new FileInputStream(reqLocation))
+		{
+			final JSONObject jsonRequest = new LimitsCheckingJSONObject(reqIn, MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
+			if (!jsonRequest.has("Request"))
+			{
+				throw new IllegalArgumentException("Invalid XACML JSON Request file: " + reqLocation + ". Expected root key: \"Request\"");
+			}
+
+			Xacml3JsonUtils.REQUEST_SCHEMA.validate(jsonRequest);
+
+			// expected response
+			final String respLocation = "src/test/resources/IIA001/Response.json";
+			try (final InputStream respIn = new FileInputStream(respLocation))
+			{
+				final JSONObject expectedResponse = new LimitsCheckingJSONObject(respIn, MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
+				if (!expectedResponse.has("Response"))
+				{
+					throw new IllegalArgumentException("Invalid XACML JSON Response file: " + respLocation + ". Expected root key: \"Response\"");
+				}
+
+				Xacml3JsonUtils.RESPONSE_SCHEMA.validate(expectedResponse);
+
+				// send request
+				final WebClient client = WebClient.create("http://localhost:" + port + "/services", Collections.singletonList(new JsonRiJaxrsProvider()));
+				final JSONObject actualResponse = client.path("pdp").type("application/xacml+json").accept("application/xacml+json").post(jsonRequest, JSONObject.class);
+
+				// check response
+				Assert.assertTrue(expectedResponse.similar(actualResponse));
+			}
+		}
+	}
+}

@@ -1,0 +1,1 @@
+- Generate REST server code from Swagger (swagger-codegen tool) using JSON schema, once JSON schema draft-06 (draft-wright-01) is supported. More info: https://github.com/OAI/OpenAPI-Specification/issues/1238

@@ -3,7 +3,7 @@
    <parent>
       <groupId>org.ow2.authzforce</groupId>
       <artifactId>authzforce-ce-restful-pdp</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>1.0.0</version>
    </parent>
    <artifactId>authzforce-ce-restful-pdp-cxf-spring-boot-server</artifactId>
    <name>${project.groupId}:${project.artifactId}</name>
@@ -20,7 +20,7 @@
       <dependency>
          <groupId>org.ow2.authzforce</groupId>
          <artifactId>authzforce-ce-restful-pdp-jaxrs</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
+         <version>1.0.0</version>
       </dependency>
       <dependency>
          <groupId>org.apache.cxf</groupId>

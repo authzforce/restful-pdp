@@ -16,7 +16,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="org.ow2.authzforce" additivity="false" level="ERROR">
+	<logger name="org.ow2.authzforce" additivity="false" level="WARN">
 		<appender-ref ref="stdout" />
 	</logger>
 <!-- HTTP/JAX-RS/SOAP request/response debugging -->
@@ -30,7 +30,7 @@
    <!-- <logger name="org.apache.http" additivity="false" level="DEBUG"> <appender-ref 
       ref="error" /> </logger> <logger name="org.apache.http.wire" level="ERROR"> 
       <appender-ref ref="error" /> </logger> -->
-	<root level="ERROR">
+	<root level="INFO">
 		<appender-ref ref="stdout" />
 	</root>
 </configuration>

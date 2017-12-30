@@ -17,7 +17,7 @@
       <url>${git.url.base}/restful-pdp/jaxrs</url>
    </scm>
    <properties>
-   <authzforce-ce-core.version>10.1.0</authzforce-ce-core.version>
+   <authzforce-ce-core.version>10.2.0</authzforce-ce-core.version>
    </properties>
    <dependencies>
       <dependency>

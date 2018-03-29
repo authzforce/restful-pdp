@@ -5,4 +5,5 @@
 			Schemas of enabled AuthzForce PDP engine extensions, such as attribute providers.
 		</xs:documentation>
 	</xs:annotation>
+	<!-- Do not specify schema locations here. Define the schema locations in the XML catalog instead (see file 'catalog.xml'). -->
 </xs:schema>

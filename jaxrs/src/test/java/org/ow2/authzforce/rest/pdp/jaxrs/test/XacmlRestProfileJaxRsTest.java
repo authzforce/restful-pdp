@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2017 Thales Services SAS.
+ * Copyright 2012-2018 Thales Services SAS.
  *
  * This file is part of AuthzForce CE.
  *
@@ -25,8 +25,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.cxf.endpoint.Server;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.ext.logging.LoggingFeature;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
@@ -72,8 +71,10 @@ public class XacmlRestProfileJaxRsTest
 		sf.setResourceProvider(XacmlPdpResource.class, new SingletonResourceProvider(new XacmlPdpResource(pdpConf)));
 		// add custom providers if any
 		sf.setProviders(Collections.singletonList(new JsonRiJaxrsProvider()));
-		sf.setInInterceptors(Collections.singletonList(new LoggingInInterceptor()));
-		sf.setOutInterceptors(Collections.singletonList(new LoggingOutInterceptor()));
+		final LoggingFeature loggingFeature = new LoggingFeature();
+		loggingFeature.setPrettyLogging(true);
+		loggingFeature.setVerbose(true);
+		sf.setFeatures(Collections.singletonList(loggingFeature));
 		sf.setAddress(ENDPOINT_ADDRESS);
 
 		server = sf.create();

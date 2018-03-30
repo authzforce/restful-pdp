@@ -66,6 +66,11 @@ You should get a XACML/JSON response such as:
 ## Extensions
 If you are missing features in AuthzForce, you can extend it with various types of plugins (without changing the existing code), as described on AuthzForce Core's [wiki](https://github.com/authzforce/core/wiki/Extensions).
 
+In order to use them, put the extension JAR(s) into an `extensions` folder in the same directory as the executable jar, already present if you followed the previous *Getting started* section. If the extension(s) use XML configuration (e.g. AttributeProvider), add the schema import into `pdp-ext.xsd` (import namespace only, do not specify schema location) and schema namespace-to-location mapping into `catalog.xml`. Then run the executable as follows:
+
+```
+$ java -Dloader.path=extensions -jar authzforce-ce-restful-pdp-cxf-spring-boot-server-1.2.0.jar
+```
 
 ## Support
 If you are experiencing any issue with this project, please report it on the [OW2 Issue Tracker](https://jira.ow2.org/browse/AUTHZFORCE/). Select component `RESTFUL-PDP` when creating the issue.

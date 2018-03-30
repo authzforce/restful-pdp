@@ -42,9 +42,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<!-- Overriding managed version to prevent "java.lang.IllegalStateException: 
-				SpringJUnit4ClassRunner requires JUnit 4.12 or higher" -->
-			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

@@ -4,6 +4,22 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## Unreleased
+## Changed
+- authzforce-ce-parent version: 7.2.0
+- authzforce-ce-core version: 15.0.0
+
+## Added
+- Possibility to load PDP extensions (new configuration files `pdp-ext.xsd`, `catalog.xml`). See README for instructions.
+- JAX-RS logging feature in `cxf-pdp-service.xml` to permit HTTP request/response logging
+
+## Removed
+- CXF swagger dependency
+
+### Fixed
+- Fixed file `application.properties` to use customized version of file `cxf-pdp-service.xml` (JAX-RS server configuration) in same folder
+
+
 ## 1.2.0
 ### Added
 - Support for loading PDP configuration files from inside JARs using `classpath:`-prefixed URLs

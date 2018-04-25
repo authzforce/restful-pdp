@@ -33,7 +33,7 @@ See the [change log](CHANGELOG.md) following the *Keep a CHANGELOG* [conventions
 See the [license file](LICENSE).
 
 ## Getting started
-Get the latest executable jar from Maven Central: groupId/artifactId = `org.ow2.authzforce`/`authzforce-ce-restful-pdp-cxf-spring-boot-server`.
+Get the [latest executable jar](http://central.maven.org/maven2/org/ow2/authzforce/authzforce-ce-restful-pdp-cxf-spring-boot-server/) from Maven Central with groupId/artifactId = `org.ow2.authzforce`/`authzforce-ce-restful-pdp-cxf-spring-boot-server`.
 
 Copy the content of [that folder](cxf-spring-boot-server/src/test/cli) to the same directory and run the executable from that directory as follows:
 

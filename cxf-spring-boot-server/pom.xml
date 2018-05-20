@@ -49,11 +49,15 @@
 			<version>1.5.8.RELEASE</version>
 			<scope>test</scope>
 			<!-- jsonassert depends on com.vaadin.external.google:android-json whose 
-				classes conflict with org.json:json -->
+				classes conflict with org.json:json; same issue with json-path -->
 			<exclusions>
 				<exclusion>
 					<groupId>org.skyscreamer</groupId>
 					<artifactId>jsonassert</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.jayway.jsonpath</groupId>
+					<artifactId>json-path</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>

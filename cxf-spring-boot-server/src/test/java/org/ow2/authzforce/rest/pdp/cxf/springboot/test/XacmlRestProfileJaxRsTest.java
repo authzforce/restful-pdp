@@ -32,11 +32,9 @@ import org.ow2.authzforce.jaxrs.util.JsonRiJaxrsProvider;
 import org.ow2.authzforce.rest.pdp.cxf.springboot.CxfJaxrsPdpSpringBootApp;
 import org.ow2.authzforce.xacml.json.model.LimitsCheckingJSONObject;
 import org.ow2.authzforce.xacml.json.model.Xacml3JsonUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -59,8 +57,8 @@ public class XacmlRestProfileJaxRsTest
 	@LocalServerPort
 	private int port;
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+	// @Autowired
+	// private TestRestTemplate restTemplate;
 
 	@Test
 	public void testPdpRequest() throws IOException

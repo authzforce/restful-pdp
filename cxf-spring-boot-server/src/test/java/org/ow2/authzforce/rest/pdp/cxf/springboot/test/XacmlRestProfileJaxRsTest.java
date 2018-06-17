@@ -26,12 +26,13 @@ import java.util.Collections;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ow2.authzforce.jaxrs.util.JsonRiJaxrsProvider;
 import org.ow2.authzforce.rest.pdp.cxf.springboot.CxfJaxrsPdpSpringBootApp;
 import org.ow2.authzforce.xacml.json.model.LimitsCheckingJSONObject;
-import org.ow2.authzforce.xacml.json.model.Xacml3JsonUtils;
+import org.ow2.authzforce.xacml.json.model.XacmlJsonUtils;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -54,6 +55,14 @@ public class XacmlRestProfileJaxRsTest
 
 	private static final int MAX_JSON_DEPTH = 10;
 
+	@BeforeClass
+	public static void setup()
+	{
+		System.setProperty("javax.xml.accessExternalSchema", "http,file");
+		// TODO: copy policies directory to maven target dir
+		// maybe not needed
+	}
+
 	@LocalServerPort
 	private int port;
 
@@ -73,7 +82,7 @@ public class XacmlRestProfileJaxRsTest
 				throw new IllegalArgumentException("Invalid XACML JSON Request file: " + reqLocation + ". Expected root key: \"Request\"");
 			}
 
-			Xacml3JsonUtils.REQUEST_SCHEMA.validate(jsonRequest);
+			XacmlJsonUtils.REQUEST_SCHEMA.validate(jsonRequest);
 
 			// expected response
 			final String respLocation = "src/test/resources/IIA001/Response.json";
@@ -85,7 +94,7 @@ public class XacmlRestProfileJaxRsTest
 					throw new IllegalArgumentException("Invalid XACML JSON Response file: " + respLocation + ". Expected root key: \"Response\"");
 				}
 
-				Xacml3JsonUtils.RESPONSE_SCHEMA.validate(expectedResponse);
+				XacmlJsonUtils.RESPONSE_SCHEMA.validate(expectedResponse);
 
 				// send request
 				final WebClient client = WebClient.create("http://localhost:" + port + "/services", Collections.singletonList(new JsonRiJaxrsProvider()));

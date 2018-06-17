@@ -34,7 +34,7 @@ import org.ow2.authzforce.core.pdp.impl.PdpEngineConfiguration;
 import org.ow2.authzforce.jaxrs.util.JsonRiJaxrsProvider;
 import org.ow2.authzforce.rest.pdp.jaxrs.XacmlPdpResource;
 import org.ow2.authzforce.xacml.json.model.LimitsCheckingJSONObject;
-import org.ow2.authzforce.xacml.json.model.Xacml3JsonUtils;
+import org.ow2.authzforce.xacml.json.model.XacmlJsonUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -104,7 +104,7 @@ public class XacmlRestProfileJaxRsTest
 			throw new IllegalArgumentException("Invalid XACML JSON Request file: " + reqLocation + ". Expected root key: \"Request\"");
 		}
 
-		Xacml3JsonUtils.REQUEST_SCHEMA.validate(jsonRequest);
+		XacmlJsonUtils.REQUEST_SCHEMA.validate(jsonRequest);
 
 		// expected response
 		final String respLocation = "src/test/resources/IIA001/Response.json";
@@ -114,7 +114,7 @@ public class XacmlRestProfileJaxRsTest
 			throw new IllegalArgumentException("Invalid XACML JSON Response file: " + respLocation + ". Expected root key: \"Response\"");
 		}
 
-		Xacml3JsonUtils.RESPONSE_SCHEMA.validate(expectedResponse);
+		XacmlJsonUtils.RESPONSE_SCHEMA.validate(expectedResponse);
 
 		// send request
 		final WebClient client = WebClient.create(ENDPOINT_ADDRESS, Collections.singletonList(new JsonRiJaxrsProvider()));

@@ -4,6 +4,16 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 1.4.0
+### Changed
+- authzforce-ce-parent (parent project) version: 7.3.0
+- Dependency authzforce-ce-core version: 13.1.0
+- Dependency authzforce-ce-jaxrs-utils version: 1.2.0
+
+### Fixed
+- Temporary workaround CVE-2018-1305, CVE-2018-1304 (affecting CXF 3.2.4 -> spring boot 1.5.10) until issue fixed in Apache CXF: forcing Spring Boot version 1.5.11 
+
+
 ## 1.3.0
 ### Changed
 - authzforce-ce-parent version: 7.2.0

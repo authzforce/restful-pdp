@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.ow2.authzforce</groupId>
 		<artifactId>authzforce-ce-restful-pdp</artifactId>
-		<version>1.4.0</version>
+		<version>1.5.0</version>
 	</parent>
 	<artifactId>authzforce-ce-restful-pdp-jaxrs</artifactId>
 	<name>${project.groupId}:${project.artifactId}</name>
@@ -17,7 +17,7 @@
 		<url>${git.url.base}/restful-pdp/jaxrs</url>
 	</scm>
 	<properties>
-		<authzforce-ce-core.version>13.1.0</authzforce-ce-core.version>
+		<authzforce-ce-core.version>13.2.0</authzforce-ce-core.version>
 	</properties>
 	<dependencies>
 		<dependency>

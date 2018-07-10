@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.ow2.authzforce</groupId>
 		<artifactId>authzforce-ce-restful-pdp</artifactId>
-		<version>1.4.0</version>
+		<version>1.5.0</version>
 	</parent>
 	<artifactId>authzforce-ce-restful-pdp-cxf-spring-boot-server</artifactId>
 	<name>${project.groupId}:${project.artifactId}</name>
@@ -16,26 +16,16 @@
 		<!-- Publicly browsable repository URL. For example, via Gitlab web UI. -->
 		<url>${git.url.base}/restful-pdp/cxf-spring-boot-server</url>
 	</scm>
-	<properties>
-			<!-- Workaround CVE-2018-1305, CVE-2018-1304 until issue fixed: https://github.com/authzforce/restful-pdp/issues/3: force 1.5.11.RELEASE of spring-boot (cxf still depends on 1.5.10.RELEASE which depends 
-			indirectly on vulnerable Tomcat) -->
-	<spring.boot.version>1.5.11.RELEASE</spring.boot.version>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.ow2.authzforce</groupId>
 			<artifactId>authzforce-ce-restful-pdp-jaxrs</artifactId>
-			<version>1.4.0</version>
+			<version>1.5.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-features-logging</artifactId>
 			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring.boot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -56,7 +46,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<version>${spring.boot.version}</version>
+			<version>1.5.14.RELEASE</version>
 			<scope>test</scope>
 			<!-- jsonassert depends on com.vaadin.external.google:android-json whose classes conflict with org.json:json; same issue with json-path -->
 			<exclusions>

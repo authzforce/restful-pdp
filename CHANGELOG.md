@@ -4,6 +4,15 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 1.5.0
+### Changed
+- authzforce-ce-parent (parent project) version: 7.4.0 -> upgraded CXF: 3.2.5 (fixed #3)
+- Dependency authzforce-ce-core version: 13.2.0
+
+### Fixed
+- #3: CVE-2018-1305, CVE-2018-1304 
+
+
 ## 1.4.0
 ### Changed
 - authzforce-ce-parent (parent project) version: 7.3.0
@@ -17,7 +26,7 @@ Issues reported on [GitHub](https://github.com/authzforce/core/issues) are refer
 ## 1.3.0
 ### Changed
 - authzforce-ce-parent version: 7.2.0
-- authzforce-ce-core version: 15.0.0
+- authzforce-ce-core version: 13.0.0
 
 ### Added
 - Possibility to load PDP extensions (new configuration files `pdp-ext.xsd`, `catalog.xml`). See README for instructions.

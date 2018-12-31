@@ -21,9 +21,8 @@ Issues reported on [GitHub](https://github.com/authzforce/core/issues) are refer
 ### Added
 - Indirect dependency: javax.mail 1.6.0 (mail-api implementation for XACML RFC822Name support)
 - Feature: 
-	- EnvironmentProperties#replacePlaceholders() method now supports replacement of system properties and environment variables enclosed with ${ } (in addition to PARENT_DIR property); and a default value (separated from the property name by '!') if the property is undefined.
-	- In particular, 'policyLocation' elements in PDP's Policy Providers configuration now supports (not only PARENT_DIR property but also) system
-properties and environment variables (enclosed between '${...}') with default value (separated from property name by '!') if the property/variable is undefined.
+	- DefaultEnvironmentProperties#replacePlaceholders() method now supports replacement of system properties and environment variables enclosed with ${ } (in addition to PARENT_DIR property); and a default value (separated from the property name by '!') if the property is undefined. Therefore, PDP extensions such as Attribute and Policy Providers can accept placeholders for system properties and environment variables in their string configuration parameters (as part of PDP configuration) and perform placeholder replacements with their factory method's input EnvironmentProperties.
+	- In particular, 'policyLocation' elements in PDP's Policy Providers configuration now supports (not only PARENT_DIR property but also) system properties and environment variables (enclosed between '${...}') with default value (separated from property name by '!') if the property/variable is undefined.
 
 
 ## 1.5.0

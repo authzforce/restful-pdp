@@ -4,6 +4,28 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 1.6.0
+### Changed
+- Maven parent project version: 7.5.0
+- Dependencies authzforce-ce-core* version: 13.3.0
+- Dependency authzforce-ce-jaxrs-utils version: 1.3.0
+- Changed indirect dependency versions:
+	- authzforce-ce-core-pdp-api: 15.3.0
+	- authzforce-ce-xacml-json-model: 2.1.0
+	- Spring: 4.3.18 (fixes CVE)
+	- Guava: 24.1.1-jre
+  	- jaxb2-basics: 1.11.1
+  	- mailapi replaced with javax.mail-api: 1.6.0
+- Copyright company name
+
+### Added
+- Indirect dependency: javax.mail 1.6.0 (mail-api implementation for XACML RFC822Name support)
+- Feature: 
+	- EnvironmentProperties#replacePlaceholders() method now supports replacement of system properties and environment variables enclosed with ${ } (in addition to PARENT_DIR property); and a default value (separated from the property name by '!') if the property is undefined.
+	- In particular, 'policyLocation' elements in PDP's Policy Providers configuration now supports (not only PARENT_DIR property but also) system
+properties and environment variables (enclosed between '${...}') with default value (separated from property name by '!') if the property/variable is undefined.
+
+
 ## 1.5.0
 ### Changed
 - authzforce-ce-parent (parent project) version: 7.4.0 -> upgraded CXF: 3.2.5 (fixed #3)

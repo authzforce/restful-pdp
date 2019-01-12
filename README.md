@@ -33,11 +33,17 @@ See the [change log](CHANGELOG.md) following the *Keep a CHANGELOG* [conventions
 See the [license file](LICENSE).
 
 ## Getting started
-Get the [latest executable jar](http://central.maven.org/maven2/org/ow2/authzforce/authzforce-ce-restful-pdp-cxf-spring-boot-server/) from Maven Central with groupId/artifactId = `org.ow2.authzforce`/`authzforce-ce-restful-pdp-cxf-spring-boot-server`.
+Get the [latest executable jar](http://central.maven.org/maven2/org/ow2/authzforce/authzforce-ce-restful-pdp-cxf-spring-boot-server/) from Maven Central with groupId/artifactId = `org.ow2.authzforce`/`authzforce-ce-restful-pdp-cxf-spring-boot-server`. 
+
+Make sure it is executable (replace `M.m.p` with the current version):
+
+```sh
+chmod u+x authzforce-ce-restful-pdp-cxf-spring-boot-server-M.m.p.jar
+```
 
 Copy the content of [that folder](cxf-spring-boot-server/src/test/resources/server) to the same directory and run the executable from that directory as follows (replace `M.m.p` with the current version):
 
-```
+```sh
 $ ./authzforce-ce-restful-pdp-cxf-spring-boot-server-M.m.p.jar
 ```
 
@@ -52,7 +58,7 @@ You know the embedded server is up and running when you see something like this 
 
 Now you can make a XACML request from a different terminal (install `curl` tool if you don't have it already on your system):
 
-```
+```sh
 $ curl --verbose --include --header "Content-Type: application/xacml+json" --data @IIA001/Request.json --request POST http://localhost:8080/services/pdp
 ```
 
@@ -68,7 +74,7 @@ If you are missing features in AuthzForce, you can extend it with various types 
 
 In order to use them, put the extension JAR(s) into an `extensions` folder in the same directory as the executable jar, already present if you followed the previous *Getting started* section. If the extension(s) use XML configuration (e.g. AttributeProvider), add the schema import into `pdp-ext.xsd` (import namespace only, do not specify schema location) and schema namespace-to-location mapping into `catalog.xml`. Then run the executable as follows (replace `M.m.p` with the current version):
 
-```
+```sh
 $ java -Dloader.path=extensions -jar authzforce-ce-restful-pdp-cxf-spring-boot-server-M.m.p.jar
 ```
 

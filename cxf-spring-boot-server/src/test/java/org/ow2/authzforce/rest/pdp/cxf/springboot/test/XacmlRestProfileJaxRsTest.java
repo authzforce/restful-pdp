@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012-2018 THALES.
+ * Copyright (C) 2012-2019 THALES.
  *
  * This file is part of AuthzForce CE.
  *
@@ -43,7 +43,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * 
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CxfJaxrsPdpSpringBootApp.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = CxfJaxrsPdpSpringBootApp.class, properties = { "spring.config.location=target/test-classes/server/application.yml", "cfg.dir=target/test-classes/server" }, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class XacmlRestProfileJaxRsTest
 {
 	private static final int MAX_JSON_STRING_LENGTH = 100;
@@ -73,7 +73,7 @@ public class XacmlRestProfileJaxRsTest
 	public void testPdpRequest() throws IOException
 	{
 		// Request body
-		final String reqLocation = "src/test/resources/IIA001/Request.json";
+		final String reqLocation = "src/test/resources/server/IIA001/Request.json";
 		try (InputStream reqIn = new FileInputStream(reqLocation))
 		{
 			final JSONObject jsonRequest = new LimitsCheckingJSONObject(reqIn, MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
@@ -85,7 +85,7 @@ public class XacmlRestProfileJaxRsTest
 			XacmlJsonUtils.REQUEST_SCHEMA.validate(jsonRequest);
 
 			// expected response
-			final String respLocation = "src/test/resources/IIA001/Response.json";
+			final String respLocation = "src/test/resources/server/IIA001/Response.json";
 			try (final InputStream respIn = new FileInputStream(respLocation))
 			{
 				final JSONObject expectedResponse = new LimitsCheckingJSONObject(respIn, MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);

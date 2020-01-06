@@ -6,7 +6,7 @@
       <version>7.5.1</version>
    </parent>
    <artifactId>authzforce-ce-restful-pdp</artifactId>
-   <version>2.0.0-SNAPSHOT</version>
+   <version>2.0.0</version>
    <packaging>pom</packaging>
    <name>${project.groupId}:${project.artifactId}</name>
    <description>AuthzForce - Parent Project of RESTful PDP API implementation according to REST Profile of XACML 3.0</description>

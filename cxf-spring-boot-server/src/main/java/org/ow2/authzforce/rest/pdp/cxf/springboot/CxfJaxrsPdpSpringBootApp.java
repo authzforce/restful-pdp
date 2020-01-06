@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012-2018 THALES.
+ * Copyright (C) 2012-2020 THALES.
  *
  * This file is part of AuthzForce CE.
  *
@@ -30,7 +30,7 @@ import org.springframework.context.annotation.ImportResource;
 @Configuration
 @EnableAutoConfiguration
 // @PropertySource("classpath:application.properties")
-@ImportResource("${pdp.service.conf}")
+@ImportResource("${spring.beans.conf}")
 public class CxfJaxrsPdpSpringBootApp
 {
 

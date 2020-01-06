@@ -4,6 +4,24 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 2.0.0
+### Changed
+- Maven parent project version: 7.5.1
+- Dependencies authzforce-ce-core* version: 14.0.1:
+	- Changed **PDP configuration format** (XML Schema 'pdp.xsd'): v7.0.0 (more info in [migration guide](https://github.com/authzforce/core/blob/develop/MIGRATION.md) ):
+	  - Replaced 'refPolicyProvider' and 'rootPolicyProvider' XML elements with 'policyProvider' and 'rootPolicyRef'.
+	  - StaticRootPolicyProvider and StaticRefPolicyProvider XML types replaced by one StaticPolicyProvider type.
+	- Added support for **Multiple Decision Profile when used with XACML/JSON Profile** (JSON input)
+	- Fixed [issue](https://github.com/authzforce/core/issues/42): invalid JSON Response on client or internal error (Status not OK)
+	- Fixed CVEs
+- Dependency authzforce-ce-jaxrs-utils version: 1.4.0:
+  - Upgraded dependency `authzforce-ce-xacml-json-model` version: 2.2.0
+
+### Fixed
+- XACML REST Profile compliance: PDP server returned 500 instead of expected 400 for invalid XACML/JSON
+Request
+
+
 ## 1.6.0
 ### Changed
 - Maven parent project version: 7.5.0
@@ -21,9 +39,8 @@ Issues reported on [GitHub](https://github.com/authzforce/core/issues) are refer
 ### Added
 - Indirect dependency: javax.mail 1.6.0 (mail-api implementation for XACML RFC822Name support)
 - Feature: 
-	- EnvironmentProperties#replacePlaceholders() method now supports replacement of system properties and environment variables enclosed with ${ } (in addition to PARENT_DIR property); and a default value (separated from the property name by '!') if the property is undefined.
-	- In particular, 'policyLocation' elements in PDP's Policy Providers configuration now supports (not only PARENT_DIR property but also) system
-properties and environment variables (enclosed between '${...}') with default value (separated from property name by '!') if the property/variable is undefined.
+	- DefaultEnvironmentProperties#replacePlaceholders() method now supports replacement of system properties and environment variables enclosed with ${ } (in addition to PARENT_DIR property); and a default value (separated from the property name by '!') if the property is undefined. Therefore, PDP extensions such as Attribute and Policy Providers can accept placeholders for system properties and environment variables in their string configuration parameters (as part of PDP configuration) and perform placeholder replacements with their factory method's input EnvironmentProperties.
+	- In particular, 'policyLocation' elements in PDP's Policy Providers configuration now supports (not only PARENT_DIR property but also) system properties and environment variables (enclosed between '${...}') with default value (separated from property name by '!') if the property/variable is undefined.
 
 
 ## 1.5.0

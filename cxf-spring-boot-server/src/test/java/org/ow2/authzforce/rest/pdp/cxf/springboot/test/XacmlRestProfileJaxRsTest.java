@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012-2018 THALES.
+ * Copyright (C) 2012-2020 THALES.
  *
  * This file is part of AuthzForce CE.
  *
@@ -23,6 +23,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -43,7 +46,8 @@ import org.springframework.test.context.junit4.SpringRunner;
  * 
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CxfJaxrsPdpSpringBootApp.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = CxfJaxrsPdpSpringBootApp.class, properties = { "spring.config.location=target/test-classes/server/application.yml",
+        "cfg.dir=target/test-classes/server" }, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class XacmlRestProfileJaxRsTest
 {
 	private static final int MAX_JSON_STRING_LENGTH = 100;
@@ -73,7 +77,7 @@ public class XacmlRestProfileJaxRsTest
 	public void testPdpRequest() throws IOException
 	{
 		// Request body
-		final String reqLocation = "src/test/resources/IIA001/Request.json";
+		final String reqLocation = "src/test/resources/server/IIA001/Request.json";
 		try (InputStream reqIn = new FileInputStream(reqLocation))
 		{
 			final JSONObject jsonRequest = new LimitsCheckingJSONObject(reqIn, MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
@@ -85,7 +89,7 @@ public class XacmlRestProfileJaxRsTest
 			XacmlJsonUtils.REQUEST_SCHEMA.validate(jsonRequest);
 
 			// expected response
-			final String respLocation = "src/test/resources/IIA001/Response.json";
+			final String respLocation = "src/test/resources/server/IIA001/Response.json";
 			try (final InputStream respIn = new FileInputStream(respLocation))
 			{
 				final JSONObject expectedResponse = new LimitsCheckingJSONObject(respIn, MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
@@ -103,6 +107,32 @@ public class XacmlRestProfileJaxRsTest
 				// check response
 				Assert.assertTrue(expectedResponse.similar(actualResponse));
 			}
+		}
+	}
+
+	@Test
+	public void testInvalidPdpRequest() throws IOException
+	{
+		// Request body (invalid according to JSON schema)
+		final String reqLocation = "src/test/resources/server/IIA001/Request-missing-category-id.json";
+		try (InputStream reqIn = new FileInputStream(reqLocation))
+		{
+			final JSONObject jsonRequest = new LimitsCheckingJSONObject(reqIn, MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
+			if (!jsonRequest.has("Request"))
+			{
+				throw new IllegalArgumentException("Invalid XACML JSON Request file: " + reqLocation + ". Expected root key: \"Request\"");
+			}
+
+			/*
+			 * No preliminary request schema validation this time, let the server reject it
+			 */
+
+			// send request
+			final WebClient client = WebClient.create("http://localhost:" + port + "/services", Collections.singletonList(new JsonRiJaxrsProvider()));
+			final Response actualResponse = client.path("pdp").type("application/xacml+json").accept("application/xacml+json").post(jsonRequest);
+
+			// check response
+			Assert.assertEquals(Status.BAD_REQUEST.getStatusCode(), actualResponse.getStatus());
 		}
 	}
 }

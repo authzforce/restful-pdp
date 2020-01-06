@@ -1,5 +1,13 @@
-<pdp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://authzforce.github.io/core/xmlns/pdp/6.0"
-   version="6.0.0" maxVariableRefDepth="10" maxPolicyRefDepth="10" strictAttributeIssuerMatch="false">
-   <!-- You may customize this PDP configuration except 'rootPolicyProvider' and 'refPolicyProvider' elements. -->
-   <rootPolicyProvider id="rootPolicyProvider" xsi:type="StaticRootPolicyProvider" policyLocation="classpath:policy.xml" />
+<?xml version="1.0" encoding="UTF-8"?>
+<pdp
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://authzforce.github.io/core/xmlns/pdp/7.0"
+	version="7.0.0" maxVariableRefDepth="10" maxPolicyRefDepth="10" strictAttributeIssuerMatch="false">
+	 <!-- You may customize this PDP configuration except 'rootPolicyProvider' element. -->
+	<policyProvider
+		id="rootPolicyProvider"
+		xsi:type="StaticPolicyProvider">
+		<policyLocation>classpath:policy.xml</policyLocation>
+	</policyProvider>
+	<rootPolicyRef>root</rootPolicyRef>
 </pdp>

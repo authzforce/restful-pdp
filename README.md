@@ -59,9 +59,9 @@ You know the embedded server is up and running when you see something like this 
 Now you can make a XACML request from a different terminal (install `curl` tool if you don't have it already on your system):
 
 ```sh
-$ curl --verbose --include --header "Content-Type: application/xacml+json" --data @IIA001/Request.json --request POST http://localhost:8080/services/pdp
+$ curl --include --header "Content-Type: application/xacml+json" --data @IIA001/Request.json http://localhost:8080/services/pdp
 ```
-
+*Add --verbose option for more details.*
 You should get a XACML/JSON response such as:
 
 ```

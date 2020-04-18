@@ -3,13 +3,17 @@
 	strictAttributeIssuerMatch="false">
 	<!-- You may customize this PDP configuration except 'rootPolicyProvider' element. -->
 	<policyProvider id="rootPolicyProvider" xsi:type="StaticPolicyProvider">
-		<policyLocation>${PARENT_DIR}/IIA001/Policy.xml</policyLocation>
+		<policyLocation>${PARENT_DIR}/policies/*.xml</policyLocation>
 	</policyProvider>
+	<!-- Must match the Policy(Set)Id of one of the Policies/PolicySets provided by the 'policyProvider', the one with which the PDP starts the evaluation (root policy).  -->
+	<rootPolicyRef>permit-all</rootPolicyRef>
 	<ioProcChain>
-		<!-- Replace requestPreproc value with "urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:multiple:repeated-attribute-categories-lax" for Multiple Decision Profile support. -->
+		<!-- XACML/XML processing chain. Replace requestPreproc value with "urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:multiple:repeated-attribute-categories-lax" for Multiple Decision Profile 
+			support. -->
 		<requestPreproc>urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:default-lax</requestPreproc>
 	</ioProcChain>
 	<ioProcChain>
+		<!-- XACML/JSON processing chain. -->
 		<requestPreproc>urn:ow2:authzforce:feature:pdp:request-preproc:xacml-json:default-lax</requestPreproc>
 		<resultPostproc>urn:ow2:authzforce:feature:pdp:result-postproc:xacml-json:default</resultPostproc>
 	</ioProcChain>

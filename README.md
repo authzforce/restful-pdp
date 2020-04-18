@@ -1,5 +1,5 @@
-[![Docker badge](https://img.shields.io/docker/pulls/authzforce/server.svg)](https://hub.docker.com/r/authzforce/server/)
 [![](https://img.shields.io/badge/tag-authzforce-orange.svg?logo=stackoverflow)](http://stackoverflow.com/questions/tagged/authzforce)
+[![Docker badge](https://img.shields.io/docker/pulls/authzforce/restful-pdp.svg)](https://hub.docker.com/r/authzforce/restful-pdp/)
 
 # AuthzForce RESTful PDP
 RESTful PDP API implementation, compliant with REST Profile of XACML 3.0. This is minimalist compared to [AuthzForce server project](http://github.com/authzforce/server) as it does not provide multi-tenant PDP/PAP but only a single PDP (per instance). Therefore, this is more suitable for microservices, or, more generally, simple applications requiring only one PDP per instance.

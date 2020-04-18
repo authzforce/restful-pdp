@@ -13,10 +13,11 @@ services:
       args:
         JAR_VERSION: "3.0.0"
    
-    image: authzforce/restful-pdp:3.0.0-SNAPSHOT
+    image: authzforce/restful-pdp:3.0.0
         
     ports:
-     - "8443:8443"
+     - "8080:8080"
+     # - "8443:8443"
      
     environment:
       # Variable to customize JVM options

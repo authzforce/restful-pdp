@@ -11,9 +11,9 @@ services:
     build: 
       context: ./pdp
       args:
-        JAR_VERSION: "3.0.0"
+        JAR_VERSION: "3.1.0"
    
-    image: authzforce/restful-pdp:3.0.0
+    image: authzforce/restful-pdp:3.1.0
         
     ports:
      - "8080:8080"

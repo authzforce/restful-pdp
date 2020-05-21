@@ -4,6 +4,22 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 3.1.0
+### Changed
+- [GH-6] : upgraded Spring Boot dependency: 2.1.13.RELEASE
+- Upgraded dependencies cxf-* (Apache CXF): 3.3.6
+- Upgraded dependencies authzforce-ce-core-pdp-engine / authzforce-ce-core-pdp-io-xacml-json : 15.2.0
+  - authzforce-ce-core-pdp-api: 16.3.0
+  - authzforce-ce-xacml-json-model: 2.3.0
+  - org.everit.json.schema: 1.12.1
+- Upgraded dependency authzforce-ce-jaxrs-utils: 1.5.0
+- Upgraded parent authzforce-ce-parent: 7.6.0
+- Optimization: disabled unnecessary Spring Boot auto-configuration classes
+
+### Added
+- Docker Compose file (with sample configuration files) used to release the Docker image (on Docker hub)
+
+
 ## 3.0.0
 ### Changed
 **XML namespaces in PDP configuration files must be updated according to [migration guide](https://github.com/authzforce/core/blob/develop/MIGRATION.md).**

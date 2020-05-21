@@ -13,3 +13,4 @@ spring.beans.conf: file:${cfg.dir}/spring-beans.xml
 
 # LOGGING
 logging.config: file:${cfg.dir}/logback.xml
+spring.main.allow-bean-definition-overriding: true

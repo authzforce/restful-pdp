@@ -1,1 +1,1 @@
-export JAVA_OPTS="-Djavax.xml.accessExternalSchema=http,file -Dloader.path=extensions"
+export JAVA_OPTS="-Djavax.xml.accessExternalSchema=http,https,file -Dloader.path=extensions"

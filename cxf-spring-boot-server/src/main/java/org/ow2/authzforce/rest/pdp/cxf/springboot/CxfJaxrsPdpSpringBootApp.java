@@ -20,6 +20,11 @@ package org.ow2.authzforce.rest.pdp.cxf.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
+import org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
@@ -28,7 +33,8 @@ import org.springframework.context.annotation.ImportResource;
  *
  */
 @Configuration
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = { WebMvcAutoConfiguration.class, WebSocketServletAutoConfiguration.class, DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class,
+        HibernateJpaAutoConfiguration.class })
 // @PropertySource("classpath:application.properties")
 @ImportResource("${spring.beans.conf}")
 public class CxfJaxrsPdpSpringBootApp
@@ -45,7 +51,7 @@ public class CxfJaxrsPdpSpringBootApp
 		/*
 		 * Allow use of http:// and file:// schema locations in XML catalogs for AuthzForce schemas
 		 */
-		System.setProperty("javax.xml.accessExternalSchema", "http,file");
+		System.setProperty("javax.xml.accessExternalSchema", "http,https,file");
 
 		SpringApplication.run(CxfJaxrsPdpSpringBootApp.class, args);
 	}

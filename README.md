@@ -1,10 +1,16 @@
+[![](https://img.shields.io/badge/tag-authzforce-orange.svg?logo=stackoverflow)](http://stackoverflow.com/questions/tagged/authzforce)
+[![Docker badge](https://img.shields.io/docker/pulls/authzforce/restful-pdp.svg)](https://hub.docker.com/r/authzforce/restful-pdp/)
+
 # AuthzForce RESTful PDP
 RESTful PDP API implementation, compliant with REST Profile of XACML 3.0. This is minimalist compared to [AuthzForce server project](http://github.com/authzforce/server) as it does not provide multi-tenant PDP/PAP but only a single PDP (per instance). Therefore, this is more suitable for microservices, or, more generally, simple applications requiring only one PDP per instance.
 
 In particular, the project provides the following (Maven groupId:artifactId):
-* `org.ow2.authzforce:authzforce-ce-restful-pdp-cxf-spring-boot-server`: a fully executable RESTful XACML PDP server (runnable from the command-line), packaged as a [Spring Boot application](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html).
+* `org.ow2.authzforce:authzforce-ce-restful-pdp-cxf-spring-boot-server`: a fully executable RESTful XACML PDP server (runnable from the command-line), packaged as a [Spring Boot application](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html) or [Docker image](https://hub.docker.com/repository/docker/authzforce/restful-pdp) (see the [Docker Compose example](docker) for usage).
 * `org.ow2.authzforce:authzforce-ce-restful-pdp-jaxrs`: pure JAX-RS implementation of a PDP service, that you can reuse as a library with any JAX-RS framework, especially other than Apache CXF, to provide your own custom RESTful PDP service.
 
+**Go to the [releases](https://github.com/authzforce/restful-pdp/releases) page for
+specific release info: downloads (Linux packages), Docker image,
+[release notes](CHANGELOG.md)**
 
 ## Features
 ### XACML PDP engine
@@ -59,9 +65,9 @@ You know the embedded server is up and running when you see something like this 
 Now you can make a XACML request from a different terminal (install `curl` tool if you don't have it already on your system):
 
 ```sh
-$ curl --verbose --include --header "Content-Type: application/xacml+json" --data @IIA001/Request.json --request POST http://localhost:8080/services/pdp
+$ curl --include --header "Content-Type: application/xacml+json" --data @IIA001/Request.json http://localhost:8080/services/pdp
 ```
-
+*Add --verbose option for more details.*
 You should get a XACML/JSON response such as:
 
 ```

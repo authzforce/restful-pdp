@@ -15,7 +15,8 @@ spring.beans.conf: file:${cfg.dir}/spring-beans.xml
 logging.config: file:${cfg.dir}/logback.xml
 
 server:
-  port: 8443
+  port: 8080
+  # port: 8443
   ssl:
     enabled: false
     # Using certificate subject's CN as alias is good practice

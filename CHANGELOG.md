@@ -4,6 +4,18 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 4.0.0
+### Changed
+- Upgraded supported JRE to **Java 11** (LTS). Java 8 no longer supported.
+- upgraded dependency authzforce-ce-core: 17.0.0
+- upgraded dependency authzforce-ce-jaxrs-utils: 2.0.0
+- Upgraded dependency Apache CXF to 3.4.1
+- upgraded dependency authzforce parent project to 8.0.0
+
+### Fixed
+- Fixed CVE on tomcat embedded: upgraded to 9.0.41
+
+
 ## 3.1.0
 ### Changed
 - [GH-6] : upgraded Spring Boot dependency: 2.1.13.RELEASE

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012-2020 THALES.
+ * Copyright (C) 2012-2021 THALES.
  *
  * This file is part of AuthzForce CE.
  *
@@ -21,6 +21,8 @@ package org.ow2.authzforce.rest.pdp.cxf.springboot.test;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 import javax.ws.rs.core.Response;
@@ -80,7 +82,7 @@ public class XacmlRestProfileJaxRsTest
 		final String reqLocation = "src/test/resources/server/IIA001/Request.json";
 		try (InputStream reqIn = new FileInputStream(reqLocation))
 		{
-			final JSONObject jsonRequest = new LimitsCheckingJSONObject(reqIn, MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
+			final JSONObject jsonRequest = new LimitsCheckingJSONObject(new InputStreamReader(reqIn, StandardCharsets.UTF_8), MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
 			if (!jsonRequest.has("Request"))
 			{
 				throw new IllegalArgumentException("Invalid XACML JSON Request file: " + reqLocation + ". Expected root key: \"Request\"");
@@ -92,7 +94,7 @@ public class XacmlRestProfileJaxRsTest
 			final String respLocation = "src/test/resources/server/IIA001/Response.json";
 			try (final InputStream respIn = new FileInputStream(respLocation))
 			{
-				final JSONObject expectedResponse = new LimitsCheckingJSONObject(respIn, MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
+				final JSONObject expectedResponse = new LimitsCheckingJSONObject(new InputStreamReader(respIn, StandardCharsets.UTF_8), MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
 				if (!expectedResponse.has("Response"))
 				{
 					throw new IllegalArgumentException("Invalid XACML JSON Response file: " + respLocation + ". Expected root key: \"Response\"");
@@ -117,7 +119,7 @@ public class XacmlRestProfileJaxRsTest
 		final String reqLocation = "src/test/resources/server/IIA001/Request-missing-category-id.json";
 		try (InputStream reqIn = new FileInputStream(reqLocation))
 		{
-			final JSONObject jsonRequest = new LimitsCheckingJSONObject(reqIn, MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
+			final JSONObject jsonRequest = new LimitsCheckingJSONObject(new InputStreamReader(reqIn, StandardCharsets.UTF_8), MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
 			if (!jsonRequest.has("Request"))
 			{
 				throw new IllegalArgumentException("Invalid XACML JSON Request file: " + reqLocation + ". Expected root key: \"Request\"");

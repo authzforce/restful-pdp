@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.ow2.authzforce</groupId>
 		<artifactId>authzforce-ce-restful-pdp</artifactId>
-		<version>3.1.0</version>
+		<version>4.0.0</version>
 	</parent>
 	<artifactId>authzforce-ce-restful-pdp-cxf-spring-boot-server</artifactId>
 	<name>${project.groupId}:${project.artifactId}</name>
@@ -16,11 +16,15 @@
 		<!-- Publicly browsable repository URL. For example, via Gitlab web UI. -->
 		<url>${git.url.base}/restful-pdp/cxf-spring-boot-server</url>
 	</scm>
+	<properties>
+		<!-- FIX: cxf-spring-boot-starter-jaxrs depends indirectly on tomcat-embed-core:9.0.39 affected by CVE-2020-17527 -->
+		<tomcat-version>9.0.41</tomcat-version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.ow2.authzforce</groupId>
 			<artifactId>authzforce-ce-restful-pdp-jaxrs</artifactId>
-			<version>3.1.0</version>
+			<version>4.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -44,6 +48,16 @@
 			</exclusions>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+			<version>${tomcat-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-websocket</artifactId>
+			<version>${tomcat-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<version>2.0.1.Final</version>
@@ -56,7 +70,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<version>2.1.13.RELEASE</version>
+			<version>${spring-boot-starter.version}</version>
 			<scope>test</scope>
 			<!-- jsonassert depends on com.vaadin.external.google:android-json whose classes conflict with org.json:json; same issue with json-path -->
 			<exclusions>
@@ -113,12 +127,8 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<configuration>
-					<onlyAnalyze>org.ow2.authzforce.*</onlyAnalyze>
-					<excludeFilterFile>findbugs-exclude-filter.xml</excludeFilterFile>
-				</configuration>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
 				<executions>
 					<execution>
 						<phase>verify</phase>
@@ -129,7 +139,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<!-- Override license-maven-plugin configuration to exclude Sunxacml files from adding GPL license headers (different license) -->
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<configuration>

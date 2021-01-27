@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2020 THALES.
+ * Copyright 2012-2021 THALES.
  *
  * This file is part of AuthzForce CE.
  *
@@ -17,13 +17,6 @@
  */
 package org.ow2.authzforce.rest.pdp.jaxrs.test;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.security.SecureRandom;
-import java.util.Collections;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.ext.logging.LoggingFeature;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
@@ -39,6 +32,16 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
+import java.util.Collections;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Test for CXF/JAX-RS-based REST profile implementation using XACML JSON Profile for payloads
@@ -87,18 +90,18 @@ public class XacmlRestProfileJaxRsTest
 	}
 
 	@AfterClass
-	public static void destroy() throws Exception
+	public static void destroy()
 	{
 		server.stop();
 		server.destroy();
 	}
 
 	@Test
-	public void testPdpRequest() throws FileNotFoundException
+	public void testPdpRequest() throws IOException
 	{
 		// Request body
 		final String reqLocation = "src/test/resources/IIA001/Request.json";
-		final JSONObject jsonRequest = new LimitsCheckingJSONObject(new FileInputStream(reqLocation), MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
+		final JSONObject jsonRequest = new LimitsCheckingJSONObject(new FileReader(reqLocation, StandardCharsets.UTF_8), MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
 		if (!jsonRequest.has("Request"))
 		{
 			throw new IllegalArgumentException("Invalid XACML JSON Request file: " + reqLocation + ". Expected root key: \"Request\"");
@@ -108,7 +111,7 @@ public class XacmlRestProfileJaxRsTest
 
 		// expected response
 		final String respLocation = "src/test/resources/IIA001/Response.json";
-		final JSONObject expectedResponse = new LimitsCheckingJSONObject(new FileInputStream(respLocation), MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
+		final JSONObject expectedResponse = new LimitsCheckingJSONObject(new FileReader(respLocation, StandardCharsets.UTF_8), MAX_JSON_STRING_LENGTH, MAX_JSON_CHILDREN_COUNT, MAX_JSON_DEPTH);
 		if (!expectedResponse.has("Response"))
 		{
 			throw new IllegalArgumentException("Invalid XACML JSON Response file: " + respLocation + ". Expected root key: \"Response\"");

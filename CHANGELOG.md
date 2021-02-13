@@ -4,6 +4,12 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 4.0.1
+### Fixed
+- Dockerfile
+- Upgraded spring-boot-maven-plugin: 2.3.5.RELEASE
+
+
 ## 4.0.0
 ### Changed
 - Upgraded supported JRE to **Java 11** (LTS). Java 8 no longer supported.

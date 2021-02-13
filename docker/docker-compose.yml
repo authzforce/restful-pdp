@@ -6,7 +6,7 @@ services:
   pdp:
     # depends_on:
     #  - iam
-    image: authzforce/restful-pdp:4.0.1-SNAPSHOT
+    image: authzforce/restful-pdp:4.0.1
         
     ports:
      - "8080:8080"

@@ -12,7 +12,7 @@ VOLUME /tmp
 RUN addgroup --system spring && adduser --system --home /home/spring --ingroup spring --disabled-password spring
 USER spring:spring
 WORKDIR /home/spring
-ARG JAR_FILE=target/*-4.0.1-SNAPSHOT.jar
+ARG JAR_FILE=target/*-4.0.1.jar
 COPY ${JAR_FILE} /app.jar
 # COPY extensions /extensions
 

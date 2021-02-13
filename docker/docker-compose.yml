@@ -6,14 +6,7 @@ services:
   pdp:
     # depends_on:
     #  - iam
-    
-    # Build section for dev/test only. Remove it in production as in that case you should use a released Docker image from a Docker registry (e.g. in Docker Hub).
-    build: 
-      context: ./pdp
-      args:
-        JAR_VERSION: "3.1.0"
-   
-    image: authzforce/restful-pdp:3.1.0
+    image: authzforce/restful-pdp:4.0.1-SNAPSHOT
         
     ports:
      - "8080:8080"
@@ -21,7 +14,7 @@ services:
      
     environment:
       # Variable to customize JVM options
-      JAVA_OPTS: "-Dloader.path=/extensions -Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Djavax.xml.accessExternalSchema=all -Xms1024m -Xmx1024m -XX:+UseConcMarkSweepGC -server"
+      JAVA_OPTS: "-Dloader.path=/extensions -Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Djavax.xml.accessExternalSchema=all -Xms512m -Xmx1024m -server"
      
     volumes:
      # The source path is given as example here. If you want to use AuthzForce PDP extensions, replace it with the path to the folder where you have the extension(s) JAR(s) with all dependencies that are not already part of the Docker image (i.e. that are not already dependencies of Maven artifact 'authzforce-ce-restful-pdp-cxf-spring-boot-server').

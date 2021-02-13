@@ -9,14 +9,11 @@ LABEL org.label-schema.name="AuthzForce RESTful PDP"
 
 VOLUME /tmp
 
-ARG JAR_VERSION
-ENV JAR_URL="https://repo1.maven.org/maven2/org/ow2/authzforce/authzforce-ce-restful-pdp-cxf-spring-boot-server/${JAR_VERSION}/authzforce-ce-restful-pdp-cxf-spring-boot-server-${JAR_VERSION}.jar"
-
-RUN apt-get update && apt-get install curl -y &&\
-    curl --verbose --location $JAR_URL --output /app.jar &&\
-    adduser --home /home/spring --disabled-password spring
+RUN addgroup --system spring && adduser --system --home /home/spring --ingroup spring --disabled-password spring
 USER spring:spring
-
+WORKDIR /home/spring
+ARG JAR_FILE=target/*-4.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} /app.jar
 # COPY extensions /extensions
 
 EXPOSE 8080

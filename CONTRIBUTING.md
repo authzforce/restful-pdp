@@ -19,5 +19,10 @@
 1. Connect and log in to the OSS Nexus Repository Manager: https://oss.sonatype.org/
 1. Go to Staging Profiles and select the pending repository authzforce-*... you just uploaded with `jgitflow:release-finish`
 1. Click the Release button to release to Maven Central.
+1. Build the Docker image
+   ```shell
+   $ docker build -t authzforce/restful-pdp:${project.version} .
+   $ docker push
+   ```
 
 More info on jgitflow: http://jgitflow.bitbucket.org/

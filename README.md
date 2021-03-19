@@ -29,7 +29,7 @@ See [AuthzForce Core features](https://github.com/authzforce/core#features) for 
 See [AuthzForce Core limitations](https://github.com/authzforce/core#limitations).
 
 ## System requirements
-Java (JRE) 8 or later.
+Java (JRE) 11 or later.
 
 
 ## Versions

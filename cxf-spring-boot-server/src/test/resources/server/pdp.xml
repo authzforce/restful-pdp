@@ -6,10 +6,11 @@
 		<policyLocation>${PARENT_DIR}/IIA001/Policy.xml</policyLocation>
 	</policyProvider>
 	<ioProcChain>
-		<!-- Replace requestPreproc value with "urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:multiple:repeated-attribute-categories-lax" (resp. "urn:ow2:authzforce:feature:pdp:request-preproc:xacml-json:multiple:repeated-attribute-categories-lax")  for Multiple Decision Profile support on XACML/XML (resp. XACML/JSON) requests. -->
+		<!-- Replace requestPreproc value with "urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:multiple:repeated-attribute-categories-lax" for Multiple Decision Profile support. -->
 		<requestPreproc>urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:default-lax</requestPreproc>
 	</ioProcChain>
 	<ioProcChain>
+		<!-- Replace requestPreproc value with "urn:ow2:authzforce:feature:pdp:request-preproc:xacml-json:multiple:repeated-attribute-categories-lax"  for Multiple Decision Profile support. -->
 		<requestPreproc>urn:ow2:authzforce:feature:pdp:request-preproc:xacml-json:default-lax</requestPreproc>
 		<resultPostproc>urn:ow2:authzforce:feature:pdp:result-postproc:xacml-json:default</resultPostproc>
 	</ioProcChain>

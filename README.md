@@ -39,7 +39,7 @@ See the [change log](CHANGELOG.md) following the *Keep a CHANGELOG* [conventions
 See the [license file](LICENSE).
 
 ## Getting started
-Get the [latest executable jar](https://repo1.maven.org/maven2/org/ow2/authzforce/authzforce-ce-restful-pdp-cxf-spring-boot-server/) from Maven Central with groupId/artifactId = `org.ow2.authzforce`/`authzforce-ce-restful-pdp-cxf-spring-boot-server`. The name of the JAR is `authzforce-ce-restful-pdp-cxf-spring-boot-server-X.X.X.jar` (replace X.X.X with the latest version).
+Get the [latest executable jar](https://repo1.maven.org/maven2/org/ow2/authzforce/authzforce-ce-restful-pdp-cxf-spring-boot-server/) from Maven Central with groupId/artifactId = `org.ow2.authzforce`/`authzforce-ce-restful-pdp-cxf-spring-boot-server`. The name of the JAR is `authzforce-ce-restful-pdp-cxf-spring-boot-server-M.m.p.jar` (replace `M.m.p` with the latest version).
 
 Make sure it is executable (replace `M.m.p` with the current version):
 

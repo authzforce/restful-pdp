@@ -115,6 +115,8 @@ Then do steps 2 to 4 of [Using Policy Providers](https://github.com/authzforce/c
     ```
 1. Add the `policyProvider` element to the PDP configuration (`pdp.xml`), using the new namespace above, like in [this example](https://github.com/authzforce/core/blob/master/pdp-testutils/src/test/resources/org/ow2/authzforce/core/pdp/testutil/test/pdp.xml) (follow the link).
 
+[More info](https://github.com/authzforce/core/wiki/Policy-Providers#more-info-on-the-mongodbpolicyprovider).
+
 ## Vulnerability reporting
 If you want to report a vulnerability, you must do so on the [OW2 Issue Tracker](https://gitlab.ow2.org/authzforce/restful-pdp/issues) and when creating the issue, check the box labeled **"This issue is confidential and should only be visible to team members with at least Reporter access"**. Then, if the AuthzForce team can confirm it, they will make it public and set a fix version.
 

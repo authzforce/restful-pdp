@@ -113,15 +113,7 @@ Then do steps 2 to 4 of [Using Policy Providers](https://github.com/authzforce/c
     ```xml
     <uri name="http://authzforce.github.io/core/xmlns/test/3" uri="classpath:org.ow2.authzforce.core.pdp.testutil.ext.xsd" />
     ```
-1. Add the `policyProvider` element to the PDP configuration (`pdp.xml`), using the new namespace above, like in [this example](https://github.com/authzforce/core/blob/master/pdp-testutils/src/test/resources/org/ow2/authzforce/core/pdp/testutil/test/pdp.xml) (follow the link). You should have something like this in the end:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<pdp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://authzforce.github.io/core/xmlns/pdp/7" xmlns:ext="http://authzforce.github.io/core/xmlns/test/3" version="7.1">
-	<policyProvider id="mongodbPolicyProvider" xsi:type="ext:MongoDBBasedPolicyProviderDescriptor" serverHost="localhost" serverPort="27017" dbName="test" collectionName="policies" />
-	<rootPolicyRef>root</rootPolicyRef>
-</pdp>
-```
+1. Add the `policyProvider` element to the PDP configuration (`pdp.xml`), using the new namespace above, like in [this example](https://github.com/authzforce/core/blob/master/pdp-testutils/src/test/resources/org/ow2/authzforce/core/pdp/testutil/test/pdp.xml) (follow the link).
 
 ## Vulnerability reporting
 If you want to report a vulnerability, you must do so on the [OW2 Issue Tracker](https://gitlab.ow2.org/authzforce/restful-pdp/issues) and when creating the issue, check the box labeled **"This issue is confidential and should only be visible to team members with at least Reporter access"**. Then, if the AuthzForce team can confirm it, they will make it public and set a fix version.

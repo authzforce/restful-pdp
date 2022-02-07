@@ -29,12 +29,8 @@ import org.ow2.authzforce.rest.pdp.jaxrs.XacmlPdpResource;
 import org.ow2.authzforce.xacml.json.model.LimitsCheckingJSONObject;
 import org.ow2.authzforce.xacml.json.model.XacmlJsonUtils;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -63,9 +59,9 @@ public class XacmlRestProfileJaxRsTest
 
 	private static Server server;
 
-	private static void startServer() throws Exception
+	private static void startServer(String pdpConfigLocation) throws Exception
 	{
-		final PdpEngineConfiguration pdpConf = PdpEngineConfiguration.getInstance("src/test/resources/pdp.xml");
+		final PdpEngineConfiguration pdpConf = PdpEngineConfiguration.getInstance(pdpConfigLocation, "src/test/resources/catalog.xml", "src/test/resources/pdp-ext.xsd");
 		/*
 		 * See also http://cxf.apache.org/docs/secure-jax-rs-services.html
 		 */
@@ -83,10 +79,11 @@ public class XacmlRestProfileJaxRsTest
 		server = sf.create();
 	}
 
+	@Parameters("pdp_config_location")
 	@BeforeClass
-	public static void initialize() throws Exception
+	public static void initialize(@Optional("src/test/resources/pdp.xml") String pdpConfigLocation) throws Exception
 	{
-		startServer();
+		startServer(pdpConfigLocation);
 	}
 
 	@AfterClass

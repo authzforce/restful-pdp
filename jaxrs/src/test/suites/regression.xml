@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="AuthzForce.Core.PDP.JSON.Profile.Conformance" verbose="3">
+   <test name="XacmlJsonRestProfileWithMongoDBPolicyProvider" preserve-order="true" enabled="true">
+      <parameter name="pdp_config_location" value="src/test/resources/GH-9/pdp.xml"></parameter>
+      <classes>
+         <class name="org.ow2.authzforce.rest.pdp.jaxrs.test.XacmlRestProfileJaxRsTest">
+         </class>
+      </classes>
+   </test>
+</suite> 
+

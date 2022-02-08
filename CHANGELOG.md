@@ -4,6 +4,45 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 5.0.0
+### Changed
+- **PDP configuration XML schema changed: follow [AuthzForce Core migration instructions](https://github.com/authzforce/core/blob/develop/MIGRATION.md#migration-from-version-17x-to-18x) to migrate your old PDP configuration(s) (`pdp.xml`) to the new schema.**
+  - Target namespace changed to `http://authzforce.github.io/core/xmlns/pdp/8`
+  - `useStandardDatatypes` replaced with `standardDatatypesEnabled`;
+  - `useStandardFunctions` replaced with `standardFunctionsEnabled`
+  - `useStandardCombiningAlgorithms` replaced with `standardCombiningAlgorithmsEnabled`
+  - `enableXPath` replaced with `xPathEnabled`
+  - `standardEnvAttributeSource` replaced with `standardAttributeProvidersEnabled` and new `attributeProvider` type `StdEnvAttributeProviderDescriptor`. More info in [AuthzForce Core README](https://github.com/authzforce/core#providing-current-datetime-current-date-and-current-time-attributes).
+  - `pdp/@version` attribute changed from required to optional with default value `8.1`
+- Parent project `authzforce-ce-parent` upgraded to 8.2.1:
+- Dependencies upgraded:
+    - `authzforce-ce-core-pdp-engine`/`authzforce-ce-core-pdp-io-xacml-json`: 19.0.0
+    - `authzforce-ce-core-pdp-api`: 20.0.0
+    - `authzforce-ce-jaxrs-utils`: 2.0.3
+    - `authzforce-ce-xacml-json-model`: 3.0.4
+    - Saxon-HE: 10.6
+    - Guava: 31.0
+    - Apache CXF: 3.5.0
+    - Spring Boot: 2.6.3
+    - Spring Core: 5.2.14
+    - SLF4J: 1.7.32
+    - `jaxb2-basics-runtime`: 0.12.0
+    - `javax.mail`: 1.6.2
+    - `tomcat-embed-core`: 9.0.58
+
+- API changes:
+
+    -  For better support of XACML standard Multiple Decision Profile, request evaluation methods of the following PDP extensions now take an extra optional parameter (`Optional<EvaluationContext>`) for the Multiple Decision Request context: `CombiningAlg`, `Function`, `NamedAttributeProvider`, `PolicyProvider`.
+
+### Added
+- XACML JSON Profile feature: support for JSON Objects in XACML/JSON Attribute Values (linked to issue authzforce/server#61 ), allowing for complex structures (JSON objects) as data types
+- Support for `<VariableReference>` equivalent in `<Target>`/`<Match>` elements: this feature is a workaround for a limitation in XACML schema which is not allowing Variables (`<VariableReference>`) in `Match` elements; i.e. the feature allows policy writers to use an equivalent of `<VariableReference>`s in `<Match>` elements (without changing the XACML schema) through a special kind of `<AttributeDesignator>` (in a specific `Category`, and `AttributeId` is used as `VariableId`). More info in [AuthzForce Core README](https://github.com/authzforce/core#using-variables-variablereference-in-targetmatch).
+
+### Fixed
+- Loading XACML/JSON schemas offline (linked to issue authzforce/server#64)
+- CVE-2021-22118, CVE-2021-22696 and CVE-2021-3046
+
+
 ## 4.0.1
 ### Fixed
 - Dockerfile

@@ -1,5 +1,5 @@
-/**
- * Copyright 2012-2021 THALES.
+/*
+ * Copyright 2012-2022 THALES.
  *
  * This file is part of AuthzForce CE.
  *
@@ -17,18 +17,12 @@
  */
 package org.ow2.authzforce.rest.pdp.jaxrs;
 
-import java.io.IOException;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import oasis.names.tc.xacml._3_0.core.schema.wd_17.Request;
 import oasis.names.tc.xacml._3_0.core.schema.wd_17.Response;
-
 import org.json.JSONObject;
 import org.ow2.authzforce.core.pdp.api.CloseablePdpEngine;
 import org.ow2.authzforce.core.pdp.api.DecisionRequestPreprocessor;
 import org.ow2.authzforce.core.pdp.api.DecisionResultPostprocessor;
-import org.ow2.authzforce.core.pdp.api.XmlUtils;
 import org.ow2.authzforce.core.pdp.api.io.BaseXacmlJaxbResultPostprocessor;
 import org.ow2.authzforce.core.pdp.api.io.PdpEngineInoutAdapter;
 import org.ow2.authzforce.core.pdp.api.value.AttributeValueFactoryRegistry;
@@ -38,6 +32,10 @@ import org.ow2.authzforce.core.pdp.impl.io.PdpEngineAdapters;
 import org.ow2.authzforce.core.pdp.impl.io.SingleDecisionXacmlJaxbRequestPreprocessor;
 import org.ow2.authzforce.core.pdp.io.xacml.json.BaseXacmlJsonResultPostprocessor;
 import org.ow2.authzforce.core.pdp.io.xacml.json.SingleDecisionXacmlJsonRequestPreprocessor;
+
+import java.io.IOException;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Bundle containing the PDP engine with associated adapters
@@ -73,12 +71,12 @@ public final class PdpBundle
 		final int clientReqErrVerbosityLevel = pdpConf.getClientRequestErrorVerbosityLevel();
 		final AttributeValueFactoryRegistry attValFactoryRegistry = pdpConf.getAttributeValueFactoryRegistry();
 		final boolean isStrictAttIssuerMatchEnabled = pdpConf.isStrictAttributeIssuerMatchEnabled();
-		final boolean isXpathEnabled = pdpConf.isXpathEnabled();
+		final boolean isXpathEnabled = pdpConf.isXPathEnabled();
 
-		this.xacmlJaxbIoAdapter = PdpEngineAdapters.newInoutAdapter(Request.class, Response.class, engine, ioProcChains, extraPdpFeatures -> SingleDecisionXacmlJaxbRequestPreprocessor.LaxVariantFactory.INSTANCE.getInstance(attValFactoryRegistry, isStrictAttIssuerMatchEnabled, isXpathEnabled, XmlUtils.SAXON_PROCESSOR,
+		this.xacmlJaxbIoAdapter = PdpEngineAdapters.newInoutAdapter(Request.class, Response.class, engine, ioProcChains, extraPdpFeatures -> SingleDecisionXacmlJaxbRequestPreprocessor.LaxVariantFactory.INSTANCE.getInstance(attValFactoryRegistry, isStrictAttIssuerMatchEnabled, isXpathEnabled,
 				extraPdpFeatures), () -> new BaseXacmlJaxbResultPostprocessor(clientReqErrVerbosityLevel));
 
-		this.xacmlJsonIoAdapter = enableXacmlJsonProfile ? PdpEngineAdapters.newInoutAdapter(JSONObject.class, JSONObject.class, engine, ioProcChains, extraPdpFeatures -> SingleDecisionXacmlJsonRequestPreprocessor.LaxVariantFactory.INSTANCE.getInstance(attValFactoryRegistry, isStrictAttIssuerMatchEnabled, isXpathEnabled, XmlUtils.SAXON_PROCESSOR,
+		this.xacmlJsonIoAdapter = enableXacmlJsonProfile ? PdpEngineAdapters.newInoutAdapter(JSONObject.class, JSONObject.class, engine, ioProcChains, extraPdpFeatures -> SingleDecisionXacmlJsonRequestPreprocessor.LaxVariantFactory.INSTANCE.getInstance(attValFactoryRegistry, isStrictAttIssuerMatchEnabled, isXpathEnabled,
 				extraPdpFeatures), () -> new BaseXacmlJsonResultPostprocessor(clientReqErrVerbosityLevel)) : null;
 	}
 

@@ -14,7 +14,7 @@ Issues reported on [GitHub](https://github.com/authzforce/core/issues) are refer
   - `enableXPath` replaced with `xPathEnabled`
   - `standardEnvAttributeSource` replaced with `standardAttributeProvidersEnabled` and new `attributeProvider` type `StdEnvAttributeProviderDescriptor`. More info in [AuthzForce Core README](https://github.com/authzforce/core#providing-current-datetime-current-date-and-current-time-attributes).
   - `pdp/@version` attribute changed from required to optional with default value `8.1`
-- Parent project `authzforce-ce-parent` upgraded to 8.2.0:
+- Parent project `authzforce-ce-parent` upgraded to 8.2.1:
 - Dependencies upgraded:
     - `authzforce-ce-core-pdp-engine`/`authzforce-ce-core-pdp-io-xacml-json`: 19.0.0
     - `authzforce-ce-core-pdp-api`: 20.0.0
@@ -23,11 +23,12 @@ Issues reported on [GitHub](https://github.com/authzforce/core/issues) are refer
     - Saxon-HE: 10.6
     - Guava: 31.0
     - Apache CXF: 3.5.0
-    - Spring Boot: 2.6.1
+    - Spring Boot: 2.6.3
     - Spring Core: 5.2.14
     - SLF4J: 1.7.32
     - `jaxb2-basics-runtime`: 0.12.0
     - `javax.mail`: 1.6.2
+    - `tomcat-embed-core`: 9.0.58
 
 - API changes:
 

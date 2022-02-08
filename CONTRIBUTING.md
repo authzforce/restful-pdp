@@ -22,6 +22,7 @@
 1. Build and publish the Docker image to Docker Hub (`version` is the last release version):
    ```shell
    $ git checkout release-${version} 
+   $ cd  cxf-spring-boot-server
    $ docker build -t authzforce/restful-pdp:${version} .
    $ docker login
    $ docker push authzforce/restful-pdp:${version}

@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.ow2.authzforce</groupId>
 		<artifactId>authzforce-ce-restful-pdp</artifactId>
-		<version>4.0.1</version>
+		<version>5.0.0</version>
 	</parent>
 	<artifactId>authzforce-ce-restful-pdp-cxf-spring-boot-server</artifactId>
 	<name>${project.groupId}:${project.artifactId}</name>
@@ -17,14 +17,36 @@
 		<url>${git.url.base}/restful-pdp/cxf-spring-boot-server</url>
 	</scm>
 	<properties>
-		<!-- FIX: cxf-spring-boot-starter-jaxrs depends indirectly on tomcat-embed-core:9.0.39 affected by CVE-2020-17527 -->
-		<tomcat-version>9.0.41</tomcat-version>
+		<tomcat-version>9.0.58</tomcat-version>
 	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<!-- Override Spring Boot v2.6.1 - used by cxf-spring-boot-starter-jaxrs:3.5.0 - which depends on Spring Core 5.3.14 which has 1 vulnerability. -->
+				<version>${spring-boot-starter.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+				<!-- jsonassert depends on com.vaadin.external.google:android-json whose classes conflict with org.json:json; same issue with json-path -->
+				<exclusions>
+					<exclusion>
+						<groupId>org.skyscreamer</groupId>
+						<artifactId>jsonassert</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.jayway.jsonpath</groupId>
+						<artifactId>json-path</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.ow2.authzforce</groupId>
 			<artifactId>authzforce-ce-restful-pdp-jaxrs</artifactId>
-			<version>4.0.1</version>
+			<version>5.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>

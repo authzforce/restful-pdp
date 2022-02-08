@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pdp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns="http://authzforce.github.io/core/xmlns/pdp/8"
+	 xmlns:ext="http://authzforce.github.io/core/xmlns/test/3" version="8.1">
+	<policyProvider id="refPolicyProvider" xsi:type="ext:MongoDBBasedPolicyProviderDescriptor" serverHost="localhost" serverPort="27017" dbName="test" collectionName="policies" />
+	<rootPolicyRef>root</rootPolicyRef>
+</pdp>
+

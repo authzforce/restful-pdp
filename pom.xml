@@ -3,10 +3,10 @@
    <parent>
       <groupId>org.ow2.authzforce</groupId>
       <artifactId>authzforce-ce-parent</artifactId>
-      <version>8.0.0</version>
+      <version>8.2.1</version>
    </parent>
    <artifactId>authzforce-ce-restful-pdp</artifactId>
-   <version>4.0.1</version>
+   <version>5.0.0</version>
    <packaging>pom</packaging>
    <name>${project.groupId}:${project.artifactId}</name>
    <description>AuthzForce - Parent Project of RESTful PDP API implementation according to REST Profile of XACML 3.0</description>
@@ -28,17 +28,6 @@
    </repositories>
 
    <!-- distributionManagement defined in parent POM already -->
-   <dependencyManagement>
-      <dependencies>
-         <!-- Test dependencies -->
-         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.1</version>
-         </dependency>
-         <!-- /Test dependencies -->
-      </dependencies>
-   </dependencyManagement>
    <modules>
       <module>jaxrs</module>
       <module>cxf-spring-boot-server</module>

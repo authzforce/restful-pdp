@@ -29,7 +29,7 @@ See [AuthzForce Core features](https://github.com/authzforce/core#features) for 
 See [AuthzForce Core limitations](https://github.com/authzforce/core#limitations).
 
 ## System requirements
-Java (JRE) 8 or later.
+Java (JRE) 11 or later.
 
 
 ## Versions
@@ -39,7 +39,7 @@ See the [change log](CHANGELOG.md) following the *Keep a CHANGELOG* [conventions
 See the [license file](LICENSE).
 
 ## Getting started
-Get the [latest executable jar](http://central.maven.org/maven2/org/ow2/authzforce/authzforce-ce-restful-pdp-cxf-spring-boot-server/) from Maven Central with groupId/artifactId = `org.ow2.authzforce`/`authzforce-ce-restful-pdp-cxf-spring-boot-server`. 
+Get the [latest executable jar](https://repo1.maven.org/maven2/org/ow2/authzforce/authzforce-ce-restful-pdp-cxf-spring-boot-server/) from Maven Central with groupId/artifactId = `org.ow2.authzforce`/`authzforce-ce-restful-pdp-cxf-spring-boot-server`. The name of the JAR is `authzforce-ce-restful-pdp-cxf-spring-boot-server-M.m.p.jar` (replace `M.m.p` with the latest version).
 
 Make sure it is executable (replace `M.m.p` with the current version):
 
@@ -83,6 +83,39 @@ In order to use them, put the extension JAR(s) into an `extensions` folder in th
 ```sh
 $ java -Dloader.path=extensions -jar authzforce-ce-restful-pdp-cxf-spring-boot-server-M.m.p.jar
 ```
+
+### Example with MongoDBPolicyProvider extension
+To use the Policy Provider for policies stored in MongoDB, please make sure the JAR with the MongoDB policy provider, i.e. the `authzforce-ce-core-pdp-testutils` module (in the **same version** as `authzforce-ce-core-pdp-engine` that is already included in AuthzForce RESTful PDP) is on the classpath, eg. in the *extensions* folder mentioned above, with *and all its required dependencies*. The main dependencies (looking at the pom of `pdp-testutils` module) in Maven terms are:
+
+```xml
+<dependency>
+         <groupId>org.jongo</groupId>
+         <artifactId>jongo</artifactId>
+	 <!-- Set the version to whatever version is specified in authzforce-ce-core-pdp-testutils Maven POM.  -->
+         <version>${jongo.version}</version>
+</dependency>
+<dependency>
+         <groupId>org.mongodb</groupId>
+         <artifactId>mongo-java-driver</artifactId>
+	<!-- Set the version to whatever version is specified in authzforce-ce-core-pdp-testutils Maven POM. -->
+         <version>${mongo-java-driver.version}</version>
+</dependency>
+```
+
+These dependencies have dependencies as well, so make sure to include them all, if not already on the classpath. (There is a way to assemble all jars in a dependency tree automatically with Maven.)
+
+Then do steps 2 to 4 of [Using Policy Providers](https://github.com/authzforce/core/wiki/Policy-Providers#using-policy-providers), that is to say:
+1. Add this import to PDP extensions schema (`pdp-ext.xsd`) to allow using the extension(s) from the `authzforce-ce-core-pdp-testutils` module in PDP configuration:
+    ```xml
+    <xs:import namespace="http://authzforce.github.io/core/xmlns/test/3" />
+    ```
+1. Add an entry to the XML catalog (`catalog.xml`) to locate the schema corresponding to this namespace:
+    ```xml
+    <uri name="http://authzforce.github.io/core/xmlns/test/3" uri="classpath:org.ow2.authzforce.core.pdp.testutil.ext.xsd" />
+    ```
+1. Add the `policyProvider` element to the PDP configuration (`pdp.xml`), using the new namespace above, like in [this example](https://github.com/authzforce/core/blob/master/pdp-testutils/src/test/resources/org/ow2/authzforce/core/pdp/testutil/test/pdp.xml) (follow the link).
+
+[More info](https://github.com/authzforce/core/wiki/Policy-Providers#more-info-on-the-mongodbpolicyprovider).
 
 ## Vulnerability reporting
 If you want to report a vulnerability, you must do so on the [OW2 Issue Tracker](https://gitlab.ow2.org/authzforce/restful-pdp/issues) and when creating the issue, check the box labeled **"This issue is confidential and should only be visible to team members with at least Reporter access"**. Then, if the AuthzForce team can confirm it, they will make it public and set a fix version.

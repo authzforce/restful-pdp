@@ -3,7 +3,7 @@
 <suite name="AuthzForce.Core.PDP.JSON.Profile.Conformance" verbose="3">
    <test name="XacmlJsonRestProfile" preserve-order="true" enabled="true">
       <classes>
-         <class name="org.ow2.authzforce.core.pdp.xacml.json.jaxrs.test.XacmlJsonRestProfileJaxRsTest">
+         <class name="org.ow2.authzforce.rest.pdp.jaxrs.test.XacmlRestProfileJaxRsTest">
          </class>
       </classes>
    </test>

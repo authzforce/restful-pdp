@@ -4,6 +4,22 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 6.0.0
+### Added
+- New feature: XPath variables in AttributeSelectors' and `xPathExpression` `AttributeValues`s' XPath expressions can now be defined by XACML VariableDefinitions (variable name used as XACML VariableId), which means XACML Variables can be used as XPath variables there.
+
+### Changed
+- Upgraded dependencies:
+  - `authzforce-ce-core-pdp-engine` to 20.0.0
+  - `authzforce-ce-core-pdp-api` to 21.1.1
+
+      - Changed Datatype extension interface (`AttributeValueFactory`) in support of the new feature above:
+
+          - `getInstance(...)` `XPathCompiler` parameter replaced with `Optional<XPathCompilerProxy>`, where XPathCompilerProxy is a immutable version of `XPathCompiler` class with extra methods; the parameter is optional because XPath support may be disabled by PDP configuration or missing Policy(Set)Defaults/XPathVersion in XACML Policy(Set)
+          - `Datatype` interface: added `ItemType getXPathItemType()` method used to declare Variable types on Saxon XPath evaluator when compiling XPath expressions with variables
+          - `AttributeValue` must now implement `getXdmItem()` to return a XPath-compatible (XDM) value to be used as variables in XPath expressions, in order to support the new Feature mentioned above.
+
+
 ## 5.0.0
 ### Changed
 - **PDP configuration XML schema changed: follow [AuthzForce Core migration instructions](https://github.com/authzforce/core/blob/develop/MIGRATION.md#migration-from-version-17x-to-18x) to migrate your old PDP configuration(s) (`pdp.xml`) to the new schema.**

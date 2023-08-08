@@ -10,23 +10,27 @@ Issues reported on [GitHub](https://github.com/authzforce/core/issues) are refer
 - `BaseXacmlJaxbRequestPreprocessor` and `SingleDecisionXacmlJaxbRequestPreprocessor` classes improved (new constructor arg: `customNamedAttributeParser`) to allow XACML/XML RequestPreprocessor extensions to customize the parsing of named Attributes with minimal effort.
 - Policy / Rule evaluation optimization: if the Rule's Condition is always False, then the Rule is always NotApplicable as per section 7.11 of XACML 3.0, therefore skip the Rule.
 
-### Changed
-- Upgraded dependencies:
-    - authzforce-ce-parent: 8.4.1
-    - authzforce-ce-core-pdp-engine: 20.3.0
-    - org.json:json: 20230227
-    - Apache CXF version: 3.5.4
-    - Spring Boot Starter: 2.6.12
-    - Spring Core: 5.3.27
-    - SLF4j: 1.7.36
-    - Saxon-HE: 10.8
-    - Guava: 31.1
-    - org.everit.json.schema, renamed everit-json-schema: 1.14.1
-    - jaxb2-basics-runtime: 0.13.1
-
 ### Fixed
+- CVEs by upgrading dependencies:
+    - authzforce-ce-parent: 8.5.0
+    - authzforce-ce-xacml-model, authzforce-ce-pdp-ext-model, authzforce-ce-xmlns-model: 8.5.0
+    - authzforce-ce-core-pdp-engine, authzforce-ce-core-pdp-io-xacml-json: 20.3.1
+    - authzforce-ce-core-pdp-api: 21.4.0
+    - authzforce-ce-xacml-json-model: 3.0.5
+    - authzforce-ce-jaxrs-utils: 2.0.4
+    - javax.mail -> jakarta.mail: 1.6.7
+    - org.json:json: 20230227
+    - Apache CXF version: 3.6.1
+    - Spring Boot Starter: 2.6.14
+    - Spring Core: 5.3.29
+    - SLF4j: 1.7.36
+    - Saxon-HE: 12.3
+    - guava: 32.1.2-jre
+    - org.everit.json.schema, renamed everit-json-schema: 1.14.2
+    - jaxb2-basics-runtime: 0.13.1
+    - jaxb-runtime: 2.3.3
+    - logback-classic: 1.2.12
 - authzforce/core#73 : Exception thrown when a Rule's Condition always returns False.
-- CVEs in dependencies
 
 
 ## 6.0.1

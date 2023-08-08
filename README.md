@@ -31,7 +31,7 @@ See [AuthzForce Core features](https://github.com/authzforce/core#features) for 
 ## Limitations
 See [AuthzForce Core limitations](https://github.com/authzforce/core#limitations).
 
-## System requirements
+## System requirements 
 Java (JRE) 11 or later.
 
 
@@ -99,9 +99,9 @@ To use the Policy Provider for policies stored in MongoDB, please make sure the 
 </dependency>
 <dependency>
          <groupId>org.mongodb</groupId>
-         <artifactId>mongo-java-driver</artifactId>
+         <artifactId>mongodb-driver-legacy</artifactId>
 	<!-- Set the version to whatever version is specified in authzforce-ce-core-pdp-testutils Maven POM. -->
-         <version>${mongo-java-driver.version}</version>
+         <version>${mongodb-driver-legacy.version}</version>
 </dependency>
 ```
 

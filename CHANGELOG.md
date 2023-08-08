@@ -4,6 +4,35 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 6.1.0
+### Added
+- authzforce/core#69 : Support for XACML `<StatusDetail>` / `<MissingAttributeDetail>`s, returned when missing named Attribute(s) in AttributeDesignator/AttributeSelector expressions, and may be returned by custom PDP extensions as well. See the example of [custom RequestPreprocessor](https://github.com/authzforce/core/blob/release-20.3.0/pdp-testutils/src/test/java/org/ow2/authzforce/core/pdp/testutil/test/CustomTestRequestPreprocessorFactory.java) (PDP extension) adding AttributeId/Category to [custom AttributeValues](https://github.com/authzforce/core/blob/release-20.3.0/pdp-testutils/src/test/java/org/ow2/authzforce/core/pdp/testutil/test/TestExtensibleSimpleValue.java) (PDP extension) and the [custom function](pdp-testutils/src/test/java/org/ow2/authzforce/core/pdp/testutil/test/TestExtensibleSimpleValueEqualFunction.java) (PDP extension) using this info to throw a standard `missing-attribute` error with `<MissingAttributeDetail>` inside a `<StatusDetail>` element; and also the [example of XACML response](https://github.com/authzforce/core/blob/release-20.3.0/pdp-testutils/src/test/resources/custom/CustomRequestPreproc/response.xml) and [PDP configuration](https://github.com/authzforce/core/blob/release-20.3.0/pdp-testutils/src/test/resources/custom/CustomRequestPreproc/pdp.xml).
+- `BaseXacmlJaxbRequestPreprocessor` and `SingleDecisionXacmlJaxbRequestPreprocessor` classes improved (new constructor arg: `customNamedAttributeParser`) to allow XACML/XML RequestPreprocessor extensions to customize the parsing of named Attributes with minimal effort.
+- Policy / Rule evaluation optimization: if the Rule's Condition is always False, then the Rule is always NotApplicable as per section 7.11 of XACML 3.0, therefore skip the Rule.
+
+### Fixed
+- CVEs by upgrading dependencies:
+    - authzforce-ce-parent: 8.5.0
+    - authzforce-ce-xacml-model, authzforce-ce-pdp-ext-model, authzforce-ce-xmlns-model: 8.5.0
+    - authzforce-ce-core-pdp-engine, authzforce-ce-core-pdp-io-xacml-json: 20.3.1
+    - authzforce-ce-core-pdp-api: 21.4.0
+    - authzforce-ce-xacml-json-model: 3.0.5
+    - authzforce-ce-jaxrs-utils: 2.0.4
+    - javax.mail -> jakarta.mail: 1.6.7
+    - org.json:json: 20230227
+    - Apache CXF version: 3.6.1
+    - Spring Boot Starter: 2.6.14
+    - Spring Core: 5.3.29
+    - SLF4j: 1.7.36
+    - Saxon-HE: 12.3
+    - guava: 32.1.2-jre
+    - org.everit.json.schema, renamed everit-json-schema: 1.14.2
+    - jaxb2-basics-runtime: 0.13.1
+    - jaxb-runtime: 2.3.3
+    - logback-classic: 1.2.12
+- authzforce/core#73 : Exception thrown when a Rule's Condition always returns False.
+
+
 ## 6.0.1
 ### Fixed
 - Dockerfile (JAR version)

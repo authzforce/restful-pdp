@@ -23,7 +23,7 @@
    ```shell
    $ git checkout release-${version} 
    $ cd  cxf-spring-boot-server
-   $ docker build -t authzforce/restful-pdp:${version} .
+   $ docker build -t authzforce/restful-pdp:latest -t authzforce/restful-pdp:${version} .
    $ docker login
    $ docker push authzforce/restful-pdp:${version}
    ```

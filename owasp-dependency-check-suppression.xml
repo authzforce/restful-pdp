@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions
-	xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.1.xsd">
-	<suppress>
+	xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+	<!--<suppress>-->
 		<!--See issue #35 on Github -->
-		<cve>CVE-2018-8088</cve>
+		<!--<cve>CVE-2018-8088</cve>-->
+	<!--</suppress>-->
+	<suppress>
+		<notes><![CDATA[
+   FP per issue https://github.com/jeremylong/DependencyCheck/issues/5545.
+   ]]></notes>
+		<packageUrl regex="true">^pkg:maven/org\.json/json@.*$</packageUrl>
+		<vulnerabilityName>CVE-2022-45688</vulnerabilityName>
+	</suppress>
+	<suppress>
+		<notes><![CDATA[
+   FP per issue #5779
+   ]]></notes>
+		<packageUrl regex="true">^pkg:maven/com\.fasterxml\.jackson\.core/jackson-databind@.*$</packageUrl>
+		<cve>CVE-2023-35116</cve>
+	</suppress>
+	<suppress>
+		<notes><![CDATA[
+  	Considered FP by Spring devs - https://github.com/spring-projects/spring-framework/issues/24434
+   ]]></notes>
+		<packageUrl>pkg:maven/org.springframework/spring-web@5.3.29</packageUrl>
+		<cve>CVE-2016-1000027</cve>
 	</suppress>
 </suppressions>

@@ -4,6 +4,25 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 7.0.0
+### Changed
+- Upgraded parent project authzforce-ce-parent: 9.1.0
+  - **Migrated to Java 17 as the minimum required JRE version from now on** 
+  - **Jakara XML Binding API (JAXB): 4.0** (javax.xml.bind.* packages/classes replaced with jakarta.xml.bind.*)
+  - Upgraded Apache CXF dependencies (cxf-*): 4.0.3
+  - Upgraded authzforce-ce-xacml-model, authzforce-ce-pdp-ext-model, authzforce-ce-xmlns-model: 9.1.0
+- Upgraded dependency authzforce-ce-jaxrs-utils: 3.0.0
+  - **Jakarta RESTful Web Services API (JAX-RS): 3.0.0** (javax.ws.rs.* packages/classes replaced with jakarta.ws.rs.*) 
+  - authzforce-ce-xacml-json-model: 4.1.0 
+- Upgraded AuthzForce Core dependencies (authzforce-ce-core-pdp-*): 21.0.1
+  - authzforce-ce-core-pdp-api: 22.0.0
+- Upgraded dependency snakeyaml: 2.2
+
+### Fixed
+- [AuthzForce Core - GH-83](https://github.com/authzforce/core/issues/83): NoSuchElementException thrown when the rule combining algorithm is permit-unless-deny and there is no Deny rule but at least one Permit rule with Obligation/Advice.
+- [AuthzForce Core - GH-92](https://github.com/authzforce/core/issues/92) Deny-overrides rule combining algorithm - Missing obligations in case of multiple Permit Rules and no Deny Rule (only the Obligations from the first Permit Rule were returned).
+
+
 ## 6.1.0
 ### Added
 - authzforce/core#69 : Support for XACML `<StatusDetail>` / `<MissingAttributeDetail>`s, returned when missing named Attribute(s) in AttributeDesignator/AttributeSelector expressions, and may be returned by custom PDP extensions as well. See the example of [custom RequestPreprocessor](https://github.com/authzforce/core/blob/release-20.3.0/pdp-testutils/src/test/java/org/ow2/authzforce/core/pdp/testutil/test/CustomTestRequestPreprocessorFactory.java) (PDP extension) adding AttributeId/Category to [custom AttributeValues](https://github.com/authzforce/core/blob/release-20.3.0/pdp-testutils/src/test/java/org/ow2/authzforce/core/pdp/testutil/test/TestExtensibleSimpleValue.java) (PDP extension) and the [custom function](pdp-testutils/src/test/java/org/ow2/authzforce/core/pdp/testutil/test/TestExtensibleSimpleValueEqualFunction.java) (PDP extension) using this info to throw a standard `missing-attribute` error with `<MissingAttributeDetail>` inside a `<StatusDetail>` element; and also the [example of XACML response](https://github.com/authzforce/core/blob/release-20.3.0/pdp-testutils/src/test/resources/custom/CustomRequestPreproc/response.xml) and [PDP configuration](https://github.com/authzforce/core/blob/release-20.3.0/pdp-testutils/src/test/resources/custom/CustomRequestPreproc/pdp.xml).

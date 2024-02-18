@@ -21,7 +21,9 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring-boot.version}</version>
+				<!--<version>${spring-boot.version}</version>-->
+				<!-- Upgrading Spring boot version to fix CVE-2023-6378-->
+				<version>3.1.8</version>
 				<type>pom</type>
 				<scope>import</scope>
 				<!-- jsonassert depends on com.vaadin.external.google:android-json whose classes conflict with org.json:json; same issue with json-path -->

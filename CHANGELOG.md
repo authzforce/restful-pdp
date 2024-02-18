@@ -17,6 +17,7 @@ Issues reported on [GitHub](https://github.com/authzforce/core/issues) are refer
 - Upgraded AuthzForce Core dependencies (authzforce-ce-core-pdp-*): 21.0.1
   - authzforce-ce-core-pdp-api: 22.0.0
 - Upgraded dependency snakeyaml: 2.2
+- Upgraded Spring-Boot-Dependencies (due to CVEs): 3.1.8
 
 ### Fixed
 - [AuthzForce Core - GH-83](https://github.com/authzforce/core/issues/83): NoSuchElementException thrown when the rule combining algorithm is permit-unless-deny and there is no Deny rule but at least one Permit rule with Obligation/Advice.

@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.ow2.authzforce</groupId>
 		<artifactId>authzforce-ce-restful-pdp</artifactId>
-		<version>6.1.0</version>
+		<version>7.0.0</version>
 	</parent>
 	<artifactId>authzforce-ce-restful-pdp-jaxrs</artifactId>
 	<name>${project.groupId}:${project.artifactId}</name>
@@ -17,7 +17,7 @@
 		<url>${git.url.base}/restful-pdp/jaxrs</url>
 	</scm>
 	<properties>
-		<authzforce-ce-core.version>20.3.1</authzforce-ce-core.version>
+		<authzforce-ce-core.version>21.0.1</authzforce-ce-core.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>org.ow2.authzforce</groupId>
 			<artifactId>authzforce-ce-jaxrs-utils</artifactId>
-			<version>2.0.4</version>
+			<version>3.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ow2.authzforce</groupId>
@@ -78,7 +78,6 @@
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
 				<configuration>
-					<cveValidForHours>24</cveValidForHours>
 					<!-- The plugin has numerous issues with version matching, which triggers 
 						false positives so we need a "suppresion" file for those. More info: https://github.com/jeremylong/DependencyCheck/issues -->
 					<suppressionFile>owasp-dependency-check-suppression.xml</suppressionFile>

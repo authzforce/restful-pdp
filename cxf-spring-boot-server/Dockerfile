@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim
+FROM eclipse-temurin:17-jre-alpine
 LABEL maintainer="AuthzForce Team"
 LABEL org.label-schema.schema-version="1.0"
 LABEL org.label-schema.vendor="THALES"

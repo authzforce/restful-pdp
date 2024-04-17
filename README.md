@@ -32,7 +32,7 @@ See [AuthzForce Core features](https://github.com/authzforce/core#features) for 
 See [AuthzForce Core limitations](https://github.com/authzforce/core#limitations).
 
 ## System requirements 
-Java (JRE) 11 or later.
+Java (JRE) 17 or later.
 
 
 ## Versions
@@ -42,6 +42,21 @@ See the [change log](CHANGELOG.md) following the *Keep a CHANGELOG* [conventions
 See the [license file](LICENSE).
 
 ## Getting started
+
+Launch the PDP with either Docker or the executable JAR as described in the next sections.
+
+### Using Docker
+
+Git clone this github repository or download the Source code ZIP from the [latest release](https://github.com/authzforce/restful-pdp/releases) and unzip it, then from the git clone / unzipped folder, go to the [`docker`](docker) directory.
+
+If you wish to use a different XACML Policy from the one provided, change the `policyLocation` parameter in the `pdp/conf/pdp.xml` (PDP configuration) file in that directory accordingly.
+
+Then run: `docker compose up -d`, then `docker compose logs` to check the PDP is up and running.
+
+(You can change the logging verbosity by modifying the Logback configuration file `pdp/conf/logback.xml`.)
+
+### Using the executable JAR
+
 Get the [latest executable jar](https://repo1.maven.org/maven2/org/ow2/authzforce/authzforce-ce-restful-pdp-cxf-spring-boot-server/) from Maven Central with groupId/artifactId = `org.ow2.authzforce`/`authzforce-ce-restful-pdp-cxf-spring-boot-server`. The name of the JAR is `authzforce-ce-restful-pdp-cxf-spring-boot-server-M.m.p.jar` (replace `M.m.p` with the latest version).
 
 Make sure it is executable (replace `M.m.p` with the current version):
@@ -50,7 +65,11 @@ Make sure it is executable (replace `M.m.p` with the current version):
 chmod u+x authzforce-ce-restful-pdp-cxf-spring-boot-server-M.m.p.jar
 ```
 
-Copy the content of [that folder](cxf-spring-boot-server/src/test/resources/server) to the same directory and run the executable from that directory as follows (replace `M.m.p` with the current version):
+Copy the content of [that folder](cxf-spring-boot-server/src/test/resources/server) to the same directory.
+
+If you wish to use a different XACML Policy from the one provided, change the `policyLocation` parameter in the `pdp.xml` (PDP configuration) file in that directory accordingly.
+
+Then run the executable from that directory as follows (replace `M.m.p` with the current version):
 
 ```sh
 $ ./authzforce-ce-restful-pdp-cxf-spring-boot-server-M.m.p.jar
@@ -63,9 +82,11 @@ You know the embedded server is up and running when you see something like this 
 ... Tomcat started on port(s): 8080 (http)
 ```
 
-(You can change logging verbosity by modifying the Logback configuration file `logback.xml` copied previously.)
+(You can change the logging verbosity by modifying the Logback configuration file `logback.xml` copied previously.)
 
-Now you can make a XACML request from a different terminal (install `curl` tool if you don't have it already on your system):
+### Send an XACML Request to the PDP
+
+Once the PDP is up and running, you can make a XACML request from a different terminal, for example using the XACML/JSON request in [that folder](cxf-spring-boot-server/src/test/resources/server/IIA001) (install `curl` tool if you don't have it already on your system):
 
 ```sh
 $ curl --include --header "Content-Type: application/xacml+json" --data @IIA001/Request.json http://localhost:8080/services/pdp

@@ -53,9 +53,9 @@ public class JaxrsPdpResource
 		final PdpBundle pdpBundle = new PdpBundle(pdpConf);
 		this.xmlPdpEngineAdapter = pdpBundle.getXacmlJaxbIoAdapter();
 		final PdpEngineInoutAdapter<JSONObject, JSONObject> defaultJsonPdpEngineAdapter = pdpBundle.getDefaultJsonIoAdapter();
-		this.defaultJsonRequestEvalFunction = defaultJsonPdpEngineAdapter == null? json -> {throw new NotSupportedException();}: json -> defaultJsonPdpEngineAdapter.evaluate(json);
+		this.defaultJsonRequestEvalFunction = defaultJsonPdpEngineAdapter == null? json -> {throw new NotSupportedException();}: defaultJsonPdpEngineAdapter::evaluate;
 		final PdpEngineInoutAdapter<JSONObject, JSONObject> xacmlJsonPdpEngineAdapter = pdpBundle.getXacmlJsonIoAdapter();
-		this.xacmlJsonRequestEvalFunction = xacmlJsonPdpEngineAdapter == null? json -> {throw new NotSupportedException();}: json -> xacmlJsonPdpEngineAdapter.evaluate(json);
+		this.xacmlJsonRequestEvalFunction = xacmlJsonPdpEngineAdapter == null? json -> {throw new NotSupportedException();}: xacmlJsonPdpEngineAdapter::evaluate;
 	}
 
 	/**

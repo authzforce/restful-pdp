@@ -54,11 +54,11 @@
 
 	<!-- <jaxrs:server depends-on="ClientAuthHttpsSettings" address="https://localhost:${testutil.ports.PdpServer}/authzforce-ce"> -->
 	<jaxrs:server
-		id="tazService"
-		address="/"
+		id="xacmlPdp"
+		address="${cxf.jaxrs.server.path}"
 		staticSubresourceResolution="true">
 		<jaxrs:serviceBeans>
-			<bean class="org.ow2.authzforce.rest.pdp.jaxrs.XacmlPdpResource">
+			<bean class="org.ow2.authzforce.rest.pdp.jaxrs.JaxrsPdpResource">
 				<constructor-arg ref="pdpEngineConf" />
 			</bean>
 		</jaxrs:serviceBeans>

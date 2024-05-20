@@ -19,5 +19,5 @@ COPY ${JAR_FILE} /app.jar
 EXPOSE 8080
 EXPOSE 8443
 
-ENV JAVA_OPTS="-Dloader.path=/extensions -Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Djavax.xml.accessExternalSchema=all -Xms1024m -Xmx2048m -server"
+ENV JAVA_OPTS="-Dloader.path=/home/spring/extensions -Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Djavax.xml.accessExternalSchema=all -Xms1024m -Xmx2048m -server"
 CMD java ${JAVA_OPTS} -jar /app.jar --spring.config.location=classpath:/,file:/conf/application.yml

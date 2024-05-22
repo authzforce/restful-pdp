@@ -25,7 +25,7 @@ import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
 import org.json.JSONObject;
 import org.ow2.authzforce.core.pdp.impl.PdpEngineConfiguration;
 import org.ow2.authzforce.jaxrs.util.JsonRiJaxrsProvider;
-import org.ow2.authzforce.rest.pdp.jaxrs.XacmlPdpResource;
+import org.ow2.authzforce.rest.pdp.jaxrs.JaxrsPdpResource;
 import org.ow2.authzforce.xacml.json.model.LimitsCheckingJSONObject;
 import org.ow2.authzforce.xacml.json.model.XacmlJsonUtils;
 import org.testng.Assert;
@@ -66,8 +66,8 @@ public class XacmlRestProfileJaxRsTest
 		 * See also http://cxf.apache.org/docs/secure-jax-rs-services.html
 		 */
 		final JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
-		sf.setResourceClasses(XacmlPdpResource.class);
-		sf.setResourceProvider(XacmlPdpResource.class, new SingletonResourceProvider(new XacmlPdpResource(pdpConf)));
+		sf.setResourceClasses(JaxrsPdpResource.class);
+		sf.setResourceProvider(JaxrsPdpResource.class, new SingletonResourceProvider(new JaxrsPdpResource(pdpConf)));
 		// add custom providers if any
 		sf.setProviders(Collections.singletonList(new JsonRiJaxrsProvider()));
 		final LoggingFeature loggingFeature = new LoggingFeature();
@@ -118,7 +118,7 @@ public class XacmlRestProfileJaxRsTest
 
 		// send request
 		final WebClient client = WebClient.create(ENDPOINT_ADDRESS, Collections.singletonList(new JsonRiJaxrsProvider()));
-		final JSONObject actualResponse = client.path("pdp").type("application/xacml+json").accept("application/xacml+json").post(jsonRequest, JSONObject.class);
+		final JSONObject actualResponse = client.path("/").type("application/xacml+json").accept("application/xacml+json").post(jsonRequest, JSONObject.class);
 
 		// check response
 		Assert.assertTrue(expectedResponse.similar(actualResponse), "JSON response does not match expected one.");

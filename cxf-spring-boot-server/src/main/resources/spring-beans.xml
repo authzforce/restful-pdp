@@ -58,7 +58,7 @@
 		address="/"
 		staticSubresourceResolution="true">
 		<jaxrs:serviceBeans>
-			<bean class="org.ow2.authzforce.rest.pdp.jaxrs.XacmlPdpResource">
+			<bean class="org.ow2.authzforce.rest.pdp.jaxrs.JaxrsPdpResource">
 				<constructor-arg ref="pdpEngineConf" />
 			</bean>
 		</jaxrs:serviceBeans>

@@ -17,28 +17,25 @@
  */
 package org.ow2.authzforce.rest.pdp.jaxrs;
 
-import java.io.IOException;
-
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-
+import jakarta.ws.rs.*;
 import oasis.names.tc.xacml._3_0.core.schema.wd_17.Request;
 import oasis.names.tc.xacml._3_0.core.schema.wd_17.Response;
-
 import org.json.JSONObject;
 import org.ow2.authzforce.core.pdp.api.io.PdpEngineInoutAdapter;
 import org.ow2.authzforce.core.pdp.impl.PdpEngineConfiguration;
 
+import java.io.IOException;
+import java.util.function.Function;
+
 /**
  * Root resource for the PDP
  */
-@Path("pdp")
-public class XacmlPdpResource
+@Path("/")
+public class JaxrsPdpResource
 {
 	private final PdpEngineInoutAdapter<Request, Response> xmlPdpEngineAdapter;
-	private final PdpEngineInoutAdapter<JSONObject, JSONObject> jsonPdpEngineAdapter;
+	private final Function<JSONObject, JSONObject> defaultJsonRequestEvalFunction;
+	private final Function<JSONObject, JSONObject> xacmlJsonRequestEvalFunction;
 
 	/**
 	 * Constructs from PDP engine supporting XACML/XML and XACML JSON Profile
@@ -51,11 +48,14 @@ public class XacmlPdpResource
 	 *             error closing {@code pdpConf.getRootPolicyProvider()} when static resolution is to be used
 	 * 
 	 */
-	public XacmlPdpResource(final PdpEngineConfiguration pdpConf) throws IllegalArgumentException, IOException
+	public JaxrsPdpResource(final PdpEngineConfiguration pdpConf) throws IllegalArgumentException, IOException
 	{
-		final PdpBundle pdpBundle = new PdpBundle(pdpConf, true);
+		final PdpBundle pdpBundle = new PdpBundle(pdpConf);
 		this.xmlPdpEngineAdapter = pdpBundle.getXacmlJaxbIoAdapter();
-		this.jsonPdpEngineAdapter = pdpBundle.getXacmlJsonIoAdapter();
+		final PdpEngineInoutAdapter<JSONObject, JSONObject> defaultJsonPdpEngineAdapter = pdpBundle.getDefaultJsonIoAdapter();
+		this.defaultJsonRequestEvalFunction = defaultJsonPdpEngineAdapter == null? json -> {throw new NotSupportedException();}: defaultJsonPdpEngineAdapter::evaluate;
+		final PdpEngineInoutAdapter<JSONObject, JSONObject> xacmlJsonPdpEngineAdapter = pdpBundle.getXacmlJsonIoAdapter();
+		this.xacmlJsonRequestEvalFunction = xacmlJsonPdpEngineAdapter == null? json -> {throw new NotSupportedException();}: xacmlJsonPdpEngineAdapter::evaluate;
 	}
 
 	/**
@@ -83,10 +83,26 @@ public class XacmlPdpResource
 	 * @return XACML/JSON Response
 	 */
 	@POST
-	@Produces({ "application/json", "application/xacml+json" })
-	@Consumes({ "application/json", "application/xacml+json" })
-	public JSONObject evaluateJson(final JSONObject request)
+	@Produces({ "application/xacml+json" })
+	@Consumes({ "application/xacml+json" })
+	public JSONObject evaluateXacmlJson(final JSONObject request)
 	{
-		return jsonPdpEngineAdapter.evaluate(request);
+		return this.xacmlJsonRequestEvalFunction.apply(request);
+	}
+
+	/**
+	 * Evaluates JSON Request according to JSON Profile of XACML 3.0
+	 *
+	 * @param request
+	 *            XACML/JSON Request
+	 *
+	 * @return XACML/JSON Response
+	 */
+	@POST
+	@Produces({ "application/json"  })
+	@Consumes({ "application/json" })
+	public JSONObject evaluateDefaultJson(final JSONObject request)
+	{
+		return this.defaultJsonRequestEvalFunction.apply(request);
 	}
 }

@@ -4,6 +4,17 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 7.1.0
+### Added
+- The service's base URL path can now be fully customized via `cxf.jaxrs.server.path` property in the `application.yml` configuration file, i.e. set to a different path from the default (`/services/pdp`). See the `docker/pdp/conf/application.yml` for an example.
+- Possibility to enable another JSON-based Authorization API (for `Content-Type/Accept = application/json`) on the REST API, such as AuthZEN (see [AuthzForce AuthZEN](https://github.com/authzforce/authzen) for an example ), in addition to the XACML/JSON Profile.
+
+### Fixed 
+- Upgraded dependencies to fix CVEs:
+  - spring-boot-dependencies: 3.1.11
+  - Apache CXF: 4.0.4
+
+
 ## 7.0.0
 ### Changed
 - Upgraded parent project authzforce-ce-parent: 9.1.0

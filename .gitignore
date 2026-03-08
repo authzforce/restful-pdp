@@ -3,6 +3,7 @@
 /.classpath
 /.project
 /target/
+/.mvn/
 **/.idea
 *.iml
 

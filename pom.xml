@@ -3,14 +3,20 @@
    <parent>
       <groupId>org.ow2.authzforce</groupId>
       <artifactId>authzforce-ce-parent</artifactId>
-      <version>9.1.0</version>
+      <version>9.2.0</version>
    </parent>
    <artifactId>authzforce-ce-restful-pdp</artifactId>
-   <version>7.1.0</version>
+   <version>7.2.0</version>
    <packaging>pom</packaging>
    <name>${project.groupId}:${project.artifactId}</name>
    <description>AuthzForce - Parent Project of RESTful PDP API implementation according to REST Profile of XACML 3.0</description>
-   <url>${project.url}</url>
+   <url>https://authzforce.ow2.org</url>
+   <licenses>
+      <license>
+         <name>GNU General Public License v3.0</name>
+         <url>https://www.gnu.org/licenses/gpl-3.0-standalone.html</url>
+      </license>
+   </licenses>
    <developers>
       <developer>
          <name>AuthzForce Team</name>
@@ -27,12 +33,6 @@
       <!-- Publicly browsable repository URL. For example, via Gitlab web UI. -->
       <url>${git.url.base}/restful-pdp</url>
    </scm>
-   <licenses>
-      <license>
-         <name>GNU General Public License v3.0</name>
-         <url>https://www.gnu.org/licenses/gpl-3.0-standalone.html</url>
-      </license>
-   </licenses>
    <repositories>
       <repository>
          <!-- Required by owasp dependency-check plugin for find info (POM) about dependency org.everit.json.schema in child modules -->

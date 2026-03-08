@@ -8,7 +8,7 @@
 	<artifactId>authzforce-ce-restful-pdp-jaxrs</artifactId>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>AuthzForce - JAX-RS implementation - usable by any JAX-RS framework - of PDP API as defined by REST Profile of XACML 3.0, and consuming/producing both XACML-XML and XACML-JSON-Profile-compliant requests/responses</description>
-	<url>${project.url}</url>
+	<url>https://authzforce.ow2.org</url>
 	<scm>
 		<connection>scm:git:${git.url.base}/restful-pdp.git</connection>
 		<developerConnection>scm:git:${git.url.base}/restful-pdp.git</developerConnection>
@@ -17,7 +17,7 @@
 		<url>${git.url.base}/restful-pdp/jaxrs</url>
 	</scm>
 	<properties>
-		<authzforce-ce-core.version>21.0.1</authzforce-ce-core.version>
+		<authzforce-ce-core.version>21.1.0</authzforce-ce-core.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>org.ow2.authzforce</groupId>
 			<artifactId>authzforce-ce-jaxrs-utils</artifactId>
-			<version>3.0.0</version>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>

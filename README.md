@@ -89,7 +89,7 @@ You know the embedded server is up and running when you see something like this 
 Once the PDP is up and running, you can make a XACML request from a different terminal, for example using the XACML/JSON request in [that folder](cxf-spring-boot-server/src/test/resources/server/IIA001) (install `curl` tool if you don't have it already on your system):
 
 ```sh
-$ curl --include --header "Content-Type: application/xacml+json" --data @IIA001/Request.json http://localhost:8080/services/pdp
+$ curl --include --header "Content-Type: application/xacml+json" --data @IIA001/Request.json http://localhost:8080/pdp
 ```
 *Add --verbose option for more details.*
 You should get a XACML/JSON response such as:

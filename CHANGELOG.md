@@ -4,6 +4,35 @@ All notable changes to this project are documented in this file following the [K
 Issues reported on [GitHub](https://github.com/authzforce/core/issues) are referenced in the form of `[GH-N]`, where N is the issue number. Issues reported on [OW2](https://jira.ow2.org/browse/AUTHZFORCE/) are mentioned in the form of `[OW2-N]`, where N is the issue number.
 
 
+## 7.2.0
+### Changed
+- Upgraded AuthzForce Parent project : 9.2.0, 
+- Upgraded dependencies:
+  - authzforce-ce-core: 21.1.0, 
+  - authzforce-ce-core-pdp-api: 22.1.1
+  - authzforce-ce-xacml-model / authzforce-ce-pdp-ext-model: 9.2.0
+  - authzforce-ce-xacml-json-model: 4.2.0
+  - authzforce-ce-jaxrs-utils: 3.1.0, 
+  - Spring Boot: 3.4.13, 
+  - Apache CXF: 4.1.5, 
+  - Snakeyaml: 2.5
+  - logback: 1.5.32
+  - slf4j: 2.0.17
+  - jaxb-runtime: 4.0.6
+  - spring-core: 6.2.15
+  - mongodb-driver-sync: 4.11.5
+  - jakarta.xml.bind-api: 4.0.4
+  - jakarta.ws.rs-api: 3.1.0
+
+- XACML datatype 'xpathExpression' (XPathValue class) support modified to support the 'attribute-selector' function from the XACML v3.0 Related and Nested Entities Profile Version 1.0
+    - 'XPathCategory' attribute made optional
+    - Added evaluate(xml, variables) method without an EvaluationContext parameter, which may now be used by PDP extensions for xpathExpression evaluation
+
+### Fixed
+- Bugfix: AttributeSelectors in a Target are rejected (error) even if Policy(Set)Defaults/XPathVersion properly declared before the Target
+- Bad regex for validating XACML dnsName values with a wildcard
+
+
 ## 7.1.0
 ### Added
 - The service's base URL path can now be fully customized via `cxf.jaxrs.server.path` property in the `application.yml` configuration file, i.e. set to a different path from the default (`/services/pdp`). See the `docker/pdp/conf/application.yml` for an example.

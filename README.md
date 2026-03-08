@@ -142,7 +142,7 @@ Then do steps 2 to 4 of [Using Policy Providers](https://github.com/authzforce/c
 [More info](https://github.com/authzforce/core/wiki/Policy-Providers#more-info-on-the-mongodbpolicyprovider).
 
 ## Vulnerability reporting
-If you want to report a vulnerability, you must do so on the [OW2 Issue Tracker](https://gitlab.ow2.org/authzforce/restful-pdp/issues) and when creating the issue, check the box labeled **"This issue is confidential and should only be visible to team members with at least Reporter access"**. Then, if the AuthzForce team can confirm it, they will make it public and set a fix version.
+If you want to report a vulnerability, please follow the [GitHub procedure for private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability#privately-reporting-a-security-vulnerability).
 
 ## Support
 If you are experiencing any issue with this project except for vulnerabilities mentioned previously, please report it on the [GitHub Issue Tracker](https://github.com/authzforce/restful-pdp/issues).
